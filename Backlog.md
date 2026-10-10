@@ -85,3 +85,63 @@ Este documento contiene las Historias de Usuario (User Stories) y Criterios de A
 - **CA-1:** El pie de página debe organizarse utilizando el elemento semántico `<footer>` con enlaces divididos en columnas semánticas ("EXPLORA" y "CREADORES").
 - **CA-2:** Debe incluir enlaces de descarga directa para el archivo `KitPrensa.zip` y accesos externos a las comunidades de Discord e itch.io.
 - **CA-3:** Todos los enlaces externos e interactivos del footer deben contar con estados de foco visibles y textos alternativos para lectores de pantalla.
+
+---
+
+## US-08: Soporte Multiidioma 
+**Como** jugador internacional o publisher extranjero,
+**quiero** poder cambiar el idioma de la página entre Español e Inglés mediante un selector,
+**para** comprender completamente la historia, las mecánicas del juego y los pasos para descargar la demo en mi idioma nativo.
+
+## Criterios de Aceptación (CA):
+- **CA-1:** Se debe implementar un selector de idioma (ES/EN) accesible en la barra de navegación superior con iconos de banderas o texto abreviado.
+- **CA-2:** La elección de idioma del usuario debe guardarse en localStorage (ej. yolcatl-lang) para que se mantenga persistente en futuras visitas.
+- **CA-3:** Todos los textos del sitio (titulares, botones, descripciones de bestiario) deben cargarse dinámicamente desde archivos JSON de traducción sin necesidad de recargar la página entera.
+
+---
+
+## US-09: Roadmap de Desarrollo 
+**Como** fan del proyecto o posible inversor,
+**quiero** visualizar un mapa de ruta (Roadmap) del desarrollo en forma de línea de tiempo,
+**para** saber en qué fase se encuentra el juego actualmente y cuándo se esperan las próximas betas o el lanzamiento final.
+
+## Criterios de Aceptación (CA):
+- **CA-1:** La línea de tiempo debe renderizarse con un diseño vertical en dispositivos móviles y horizontal o en zigzag en pantallas de escritorio.
+- **CA-2:** Los hitos completados deben diferenciarse visualmente (ej. iconos con check, colores opacos) de los hitos futuros (ej. líneas punteadas, colores translúcidos).
+- **CA-3:** Los elementos de la línea de tiempo deben incluir una animación de entrada (fade-in) vinculada al scroll usando la Intersection Observer API para mejorar el impacto visual al navegar.
+
+---
+
+## US-10: Carrusel Interactivo de Capturas de Pantalla 
+**Como** visitante interesado en el arte visual del juego,
+**quiero** explorar una galería de capturas de pantalla de alta resolución mediante un carrusel,
+**para** apreciar los detalles gráficos de la hacienda y el caos de los combates Bullet Heaven nocturnos.
+
+## Criterios de Aceptación (CA):
+- **CA-1:** El carrusel debe permitir la navegación mediante gestos de deslizamiento (swipe) en móviles y mediante botones de flecha anterior/siguiente en escritorio.
+- **CA-2:** Al hacer clic en una imagen del carrusel, esta debe abrirse en un componente Modal (Lightbox) a pantalla completa con botón para cerrar pulsando la tecla Escape.
+- **CA-3:** Las imágenes de la galería deben implementar el atributo loading="lazy" y utilizar formatos de nueva generación (WebP) para evitar penalizaciones en el tiempo de carga (LCP).
+
+---
+
+## US-11: Vista Previa Escaneable de Alquimia AR
+**Como** usuario navegando desde una computadora de escritorio,
+**quiero** ver un código QR dinámico en la sección de "Alquimia AR",
+**para** escanearlo con mi móvil y probar una pequeña demostración de realidad aumentada web sin instalar nada.
+
+## Criterios de Aceptación (CA):
+- **CA-1:** En resoluciones de escritorio (>768px), la sección AR debe generar y mostrar un código QR que apunte a la URL de la experiencia WebAR alojada en el servidor.
+- **CA-2:** En resoluciones móviles, el código QR debe ocultarse y ser reemplazado por un botón principal (CTA) que diga "Probar Filtro AR Ahora".
+- **CA-3:** Al acceder a la URL de la demo, la aplicación debe solicitar los permisos de cámara mediante la API del navegador y manejar los rechazos de permisos con un mensaje de error amigable.
+
+---
+
+## US-12: Optimización SEO y Tarjetas Sociales 
+**Como** encargado de marketing del estudio indie,
+**quiero** que la página cuente con meta etiquetas configuradas para redes sociales,
+**para** que al compartir el enlace del juego en Twitter, Discord o WhatsApp, se genere automáticamente una tarjeta visual atractiva que aumente el CTR (Click-Through Rate).
+
+## Criterios de Aceptación (CA):
+- **CA-1:** La cabecera del documento <head> debe incluir etiquetas Open Graph (og:title, og:description, og:image) y Twitter Cards (twitter:card, twitter:image).
+- **CA-2:** La imagen definida en og:image debe tener una resolución recomendada de 1200x630 píxeles, mostrando el logotipo del juego y arte clave promocional.
+- **CA-3:** El documento HTML debe mantener una jerarquía de encabezados (<h1> a <h3>) lógicamente estructurada y alcanzar una puntuación de SEO superior a 90 en pruebas automatizadas de Lighthouse.
