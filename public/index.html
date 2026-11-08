@@ -4,542 +4,368 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    
-    <!-- Metaetiquetas SEO y Redes Sociales -->
-    <title>YOLCATL - Cozy Farming & Bullet Heaven</title>
-    <meta name="description" content="YOLCATL: Simulador de granja mística, alquimia interactiva en Realidad Aumentada y supervivencia Bullet Heaven con herencia mesoamericana.">
-    <meta property="og:title" content="YOLCATL - Cultiva de día, sobrevive de noche">
-    <meta property="og:description" content="Sana a la fauna sagrada con herbolaria ancestral en AR y defiéndete de la corrupción humana.">
-    <meta property="og:image" content="LogoYolcatlPromo.png">
+    <meta name="description" content="Yolcatl es un simulador de granja mística y bullet heaven con folclore mesoamericano: cultiva herbolaria de día, cura animales sagrados y defiende el santuario de noche. Un jugador, sin conexión.">
+    <meta property="og:title" content="Yolcatl · Cultiva de día, sobrevive de noche">
+    <meta property="og:description" content="Cozy farming y bullet heaven con herbolaria, alebrijes y nahuales. Prueba la demo.">
     <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
+    <title>Yolcatl · Cozy Farming y Bullet Heaven</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
-    <!-- Tipografía -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Lilita+One&display=swap" rel="stylesheet">
-
-    <!-- Prevención de parpadeo (FOUC) para Modo Oscuro -->
+    <!-- Tema sin parpadeo: aplica la clase antes de pintar (único script en línea) -->
     <script>
         (function () {
             var saved = null;
             try { saved = localStorage.getItem('yolcatl-theme'); } catch (e) {}
             var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.documentElement.classList.toggle('dark', dark);
-            document.documentElement.classList.toggle('light', !dark);
+            var root = document.documentElement;
+            root.classList.add('js');
+            root.classList.toggle('dark', dark);
+            root.classList.toggle('light', !dark);
         })();
     </script>
 
-    <!-- Hoja de Estilos y Script Principal Modular -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Lilita+One&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="main.js" defer></script>
 </head>
 <body>
+    <a href="#contenido" class="sr-only skip-link">Saltar al contenido principal</a>
 
-    <!-- Enlace accesible para saltar contenido (para teclados/lectores de pantalla) -->
-    <a href="#contenido" class="sr-only focusable">Saltar al contenido principal</a>
-
-    <!-- Notificaciones Dinámicas (Toast) -->
-    <div id="toast-container" class="toast-container" aria-live="polite"></div>
-
-    <!-- Controles de Tema Día/Noche -->
+    <!-- Interruptor Día / Noche: también revela los poderes de defensa del bestiario -->
     <div class="theme-switch" role="group" aria-label="Tema de color">
-        <button id="btn-dia" type="button" aria-pressed="true" class="theme-btn btn-flat" aria-label="Cambiar a modo Día">
-            <span aria-hidden="true">☀️</span> DÍA
-        </button>
-        <button id="btn-noche" type="button" aria-pressed="false" class="theme-btn btn-flat" aria-label="Cambiar a modo Noche">
-            <span aria-hidden="true">🌙</span> NOCHE
-        </button>
+        <button id="btn-dia" class="theme-btn" type="button" aria-pressed="true"><span aria-hidden="true">☀️</span> DÍA</button>
+        <button id="btn-noche" class="theme-btn" type="button" aria-pressed="false"><span aria-hidden="true">🌙</span> NOCHE</button>
     </div>
+    <p id="theme-status" class="sr-only" role="status"></p>
 
-    <!-- Encabezado y Navegación Principal -->
-    <header class="main-header border-pattern">
-        <nav class="navbar max-w-7xl" aria-label="Navegación principal">
-            <a href="#hero" class="logo-link">
-                <img src="logo.png" alt="Logotipo oficial de YOLCATL, ir al inicio" class="logo-img">
-            </a>
-
-            <!-- Botón Menú Móvil -->
-            <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-label="Abrir menú de navegación" aria-controls="nav-links-list">
-                <span class="hamburger-bar"></span>
-                <span class="hamburger-bar"></span>
-                <span class="hamburger-bar"></span>
+    <header class="site-header">
+        <nav class="container navbar" aria-label="Navegación principal">
+            <a href="#hero" class="brand"><img src="assets/logo.jpg" alt="Yolcatl, ir al inicio" width="900" height="145"></a>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
+                <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
             </button>
-
-            <!-- Enlaces de Navegación -->
-            <ul class="nav-links" id="nav-links-list">
-                <li><a href="#hacienda" class="nav-item">La Hacienda</a></li>
-                <li><a href="#ciclo" class="nav-item">Ciclo de Juego</a></li>
-                <li><a href="#alquimia" class="nav-item">Alquimia AR</a></li>
-                <li><a href="#metamorfosis" class="nav-item">Metamorfosis</a></li>
-                <li><a href="#galeria" class="nav-item">Galería</a></li>
-                <li><a href="#roadmap" class="nav-item">Roadmap</a></li>
+            <ul id="nav-menu" class="nav-links">
+                <li><a href="#hacienda">Historia</a></li>
+                <li><a href="#ciclo">Ciclo</a></li>
+                <li><a href="#alquimia">Alquimia</a></li>
+                <li><a href="#metamorfosis">Bestiario</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#demo" class="btn" data-track="cta_demo_nav">Probar la demo</a></li>
             </ul>
-
-            <!-- Acciones Rápidas (Login y Jugar) -->
-            <div class="header-actions">
-                <button type="button" class="btn btn-reward" id="btn-reward-login" aria-label="Recompensa diaria: inicia sesión para reclamarla">
-                    <span aria-hidden="true">🎁</span> <span class="hide-mobile">Recompensa</span>
-                </button>
-                <button type="button" class="btn btn-login" id="btn-user-login" aria-label="Iniciar sesión">
-                    <span aria-hidden="true">👤</span> <span class="hide-mobile">Entrar</span>
-                </button>
-                <a href="https://itch.io" target="_blank" rel="noopener noreferrer" class="btn btn-play btn-primary">
-                    JUGAR<span class="sr-only"> (se abre en una pestaña nueva)</span>
-                </a>
-            </div>
         </nav>
     </header>
 
-    <!-- Contenido Principal -->
     <main id="contenido" tabindex="-1">
-        
-        <!-- 1. Hero Section -->
-        <section id="hero" class="hero-section max-w-7xl" aria-labelledby="hero-title">
+
+        <!-- US-04 · ¿De qué trata Yolcatl? -->
+        <section id="hero" class="container hero" aria-labelledby="hero-title">
             <div class="hero-grid">
-                <div class="hero-content">
-                    <div class="badge">Cozy Farming • Realidad Aumentada • Bullet Heaven</div>
-                    <h1 id="hero-title" class="hero-title">
-                        Cultiva de día,<br>sobrevive<br>de noche.
-                        <span class="hero-subtitle">Despierta al nahual que llevas dentro</span>
+                <div>
+                    <p class="hero-badge">Cozy Farming · Bullet Heaven</p>
+                    <h1 id="hero-title">
+                        Yolcatl: cultiva de día, sobrevive de noche
+                        <span class="tagline">Despierta al nahual que llevas dentro</span>
                     </h1>
-                    <p class="hero-description">
-                        Una hacienda colonial suspendida en el tiempo. Sana a la fauna sagrada con herbolaria ancestral en Realidad Aumentada y defiéndete de la corrupción humana en batallas frenéticas.
-                    </p>
-
+                    <p class="pitch">Cuida una hacienda mística de día, cura animales sagrados con medicina de molcajete y, de noche, toma su forma de nahual para defender el santuario de Las Entidades. Un jugador, sin conexión.</p>
+                    <p class="slogan">«Planta esta semilla en la vida real y cultiva tu jardín en Yolcatl».</p>
                     <div class="hero-actions">
-                        <a href="Yolcatl-Demo.apk" download="Yolcatl-Demo.apk" class="btn btn-pill btn-primary">
-                            <span aria-hidden="true">⬇</span> DESCARGAR DEMO<span class="sr-only"> (APK)</span>
-                        </a>
-                        <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="btn btn-pill btn-secondary">
-                            <span aria-hidden="true">▶️</span> VER TRÁILER<span class="sr-only"> (ventana nueva)</span>
-                        </a>
+                        <a href="#demo" class="btn btn-pill" data-track="cta_demo_hero">Probar la demo</a>
+                        <a href="#showcase" class="btn btn-pill btn-light">Ver el juego</a>
+                    </div>
+                    <ul class="chips" aria-label="Datos clave">
+                        <li class="chip">1 jugador</li>
+                        <li class="chip">100 % sin conexión</li>
+                        <li class="chip">Optimizado para gama baja</li>
+                    </ul>
+                </div>
+                <div class="frame hero-media">
+                    <img class="img-day" src="assets/hacienda-dia.svg" width="800" height="600" alt="Captura conceptual de la hacienda de día, con parcelas de cultivo y animales rescatados">
+                    <img class="img-night" src="assets/hacienda-noche.svg" width="800" height="600" alt="Captura conceptual de la hacienda de noche, durante una invasión de Entidades">
+                </div>
+            </div>
+        </section>
+
+        <!-- US-06 · ¿Qué historia y qué valor ofrece? -->
+        <section id="hacienda" class="section section-alt" aria-labelledby="hacienda-title">
+            <div class="container">
+                <div class="section-head animate-on-scroll">
+                    <h2 id="hacienda-title">El despertar de la Visión</h2>
+                    <p>La historia del Pajianí, la hacienda y los Guardianes, entre el amanecer y el eclipse.</p>
+                </div>
+                <div class="split">
+                    <div class="stack">
+                        <article class="card animate-on-scroll">
+                            <div class="card-row">
+                                <div class="icon-dot papel" aria-hidden="true">👁️</div>
+                                <div>
+                                    <h3>El experimento y «La Visión»</h3>
+                                    <p>Como Pajianí, investigador y alquimista, sufres un accidente alquímico que despierta tu percepción: ahora ves la contaminación invisible que envenena el valle.</p>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="card animate-on-scroll">
+                            <div class="card-row">
+                                <div class="icon-dot" aria-hidden="true">🏠</div>
+                                <div>
+                                    <h3>La hacienda ancestral</h3>
+                                    <p>Un refugio virreinal rodeado por una jungla corrompida. Cada cierto número de días llega una invasión, y siempre se anuncia con 3 días de anticipación.</p>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="card animate-on-scroll">
+                            <div class="card-row">
+                                <div class="icon-dot agave" aria-hidden="true">🌿</div>
+                                <div>
+                                    <h3>Los Guardianes de la naturaleza</h3>
+                                    <p>Espíritus antiguos como Chicome. Al entregarles Orbes Místicos restauran su poder y expanden el santuario.</p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <figure class="animate-on-scroll">
+                        <div class="frame"><img src="assets/alebrijes-guardianes.svg" width="600" height="800" loading="lazy" alt="Ilustración conceptual de alebrijes protectores y espíritus guardianes de la naturaleza"></div>
+                        <figcaption class="figure-cap">Arte conceptual: alebrijes y Guardianes del santuario.</figcaption>
+                    </figure>
+                </div>
+                <div class="pillars">
+                    <h3>Propuesta de valor</h3>
+                    <ul class="cards-grid grid-4">
+                        <li class="card animate-on-scroll"><h3>Relajación y adrenalina</h3><p>Cultiva con calma de día y defiéndete con acción frenética de noche.</p></li>
+                        <li class="card animate-on-scroll"><h3>Progresión con significado</h3><p>Cada animal que curas te presta su forma de nahual: avanzar es crear vínculos.</p></li>
+                        <li class="card animate-on-scroll"><h3>Cultura mesoamericana viva</h3><p>Herbolaria, alebrijes y lengua náhuatl, tratados con respeto y sin caricaturas.</p></li>
+                        <li class="card animate-on-scroll"><h3>Accesible sin perder profundidad</h3><p>Combate de apuntado automático, controles intuitivos y un modo pacifista, el Jardín Zen.</p></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- US-07 · ¿Qué haré de día y de noche? -->
+        <section id="ciclo" class="section container" aria-labelledby="ciclo-title">
+            <div class="section-head animate-on-scroll">
+                <h2 id="ciclo-title">El ciclo de juego</h2>
+                <p>Tres fases circulares que se alimentan entre sí: amanecer tras eclipse.</p>
+            </div>
+            <div class="tablist" role="tablist" aria-label="Fases del ciclo de juego">
+                <button class="tab-btn" type="button" role="tab" id="btn-tab1" aria-selected="true" aria-controls="tab1" tabindex="0"><span aria-hidden="true">1️⃣</span> Exploración y cultivo</button>
+                <button class="tab-btn" type="button" role="tab" id="btn-tab2" aria-selected="false" aria-controls="tab2" tabindex="-1"><span aria-hidden="true">2️⃣</span> Alquimia y curación</button>
+                <button class="tab-btn" type="button" role="tab" id="btn-tab3" aria-selected="false" aria-controls="tab3" tabindex="-1"><span aria-hidden="true">3️⃣</span> Supervivencia nocturna</button>
+            </div>
+            <div class="tab-box">
+                <div id="tab1" class="tab-panel active" role="tabpanel" aria-labelledby="btn-tab1">
+                    <h3>Labranza sagrada en 4 pasos</h3>
+                    <p>Ara la tierra, siembra semillas sagradas, riega y cosecha Copal, Cempasúchil y Árnica para tus remedios.</p>
+                    <div class="mini-grid">
+                        <div class="mini">Arar la parcela</div><div class="mini">Sembrar semillas</div>
+                        <div class="mini">Regar con manantial</div><div class="mini">Cosechar herbolaria</div>
                     </div>
                 </div>
+                <div id="tab2" class="tab-panel" role="tabpanel" aria-labelledby="btn-tab2">
+                    <h3>Enfermería y remedios ancestrales</h3>
+                    <p>Con «La Visión» encuentras animales heridos y los curas con medicina preparada en el molcajete. Cada animal sanado te presta su forma de nahual.</p>
+                    <div class="mini-grid">
+                        <div class="mini papel">Diagnóstico del animal</div><div class="mini papel">Mezcla en el molcajete</div>
+                        <div class="mini papel">Aplicación del remedio</div><div class="mini papel">Liberación del espíritu</div>
+                    </div>
+                </div>
+                <div id="tab3" class="tab-panel" role="tabpanel" aria-labelledby="btn-tab3">
+                    <h3>Bullet heaven nocturno</h3>
+                    <p>Oleadas de Entidades asedian el santuario: esquiva, ataca en automático y despliega las habilidades de tus nahuales.</p>
+                    <div class="mini-grid">
+                        <div class="mini noche">Invasión avisada 3 días antes</div><div class="mini noche">Ataque automático</div>
+                        <div class="mini noche">Esquiva y posicionamiento</div><div class="mini noche">Habilidades nahuales</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                <figure class="hero-figure">
-                    <picture>
-                        <!-- Imagen que se muestra según el modo preferido -->
-                        <img id="hero-img-light" src="HaciendaDia.png" class="img-light-only" alt="Hacienda colonial de día enfocada en el cultivo">
-                        <img id="hero-img-dark" src="HaciendaNoche.png" class="img-dark-only" alt="Hacienda colonial de noche en modo defensa">
-                    </picture>
-                    <figcaption class="sr-only">Santuario ancestral de Yolcatl en el valle colonial.</figcaption>
+        <!-- US-07 · ¿Qué lo hace diferente? (alquimia sin AR) -->
+        <section id="alquimia" class="section section-soft" aria-labelledby="alquimia-title">
+            <div class="container split">
+                <figure class="animate-on-scroll">
+                    <div class="frame"><img src="assets/molcajete.svg" width="800" height="600" loading="lazy" alt="Captura conceptual de la estación del molcajete con hierbas listas para moler"></div>
+                    <figcaption class="figure-cap">Captura conceptual de la estación del molcajete.</figcaption>
                 </figure>
-            </div>
-        </section>
-
-        <!-- 2. El Despertar de la Visión -->
-        <section id="hacienda" class="section-hacienda border-pattern-y" aria-labelledby="hacienda-title">
-            <div class="max-w-7xl">
-                <h2 id="hacienda-title" class="section-title text-talavera">El Despertar de la Visión</h2>
-                <p class="section-subtitle">Sinopsis del mundo que habitarás entre el amanecer y el eclipse.</p>
-
-                <div class="about-grid">
-                    <div class="about-cards">
-                        <article class="card-panel">
-                            <div class="card-icon bg-papel" aria-hidden="true">👁️</div>
-                            <div class="card-content">
-                                <h3>El Experimento y «La Visión»</h3>
-                                <p>Un ritual fallido despierta tu percepción: ahora ves la contaminación invisible que envenena el valle.</p>
-                            </div>
-                        </article>
-                        <article class="card-panel">
-                            <div class="card-icon bg-marigold" aria-hidden="true">🏠</div>
-                            <div class="card-content">
-                                <h3>La Hacienda Ancestral</h3>
-                                <p>Un refugio virreinal intacto, rodeado por una jungla corrompida que avanza cada noche.</p>
-                            </div>
-                        </article>
-                        <article class="card-panel">
-                            <div class="card-icon bg-agave" aria-hidden="true">🌿</div>
-                            <div class="card-content">
-                                <h3>Los Guardianes de la Naturaleza</h3>
-                                <p>Espíritus antiguos que otorgan bendiciones botánicas a cambio de purificar la tierra con Orbes Místicos.</p>
-                            </div>
-                        </article>
+                <div>
+                    <p class="eyebrow">Mecánica distintiva</p>
+                    <div class="section-head" style="margin-bottom:var(--space-md)">
+                        <h2 id="alquimia-title">Alquimia con molcajete</h2>
+                        <p>No hay un botón de «fabricar»: la medicina se prepara con las manos.</p>
                     </div>
-
-                    <figure class="about-illustration card-panel">
-                        <img src="AlebrijesGuardianes.png" loading="lazy" alt="Ilustración conceptual de alebrijes protectores de la naturaleza">
-                    </figure>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. El Ciclo de Juego (Pestañas accesibles) -->
-        <section id="ciclo" class="section-ciclo max-w-7xl" aria-labelledby="ciclo-title">
-            <h2 id="ciclo-title" class="section-title">El Ciclo de Juego</h2>
-            <p class="section-subtitle">Tres fases circulares que se alimentan entre sí.</p>
-
-            <div class="tabs-nav" role="tablist" aria-label="Fases del ciclo de juego">
-                <button type="button" role="tab" aria-selected="true" aria-controls="tab1" id="btn-tab1" class="tab-btn active">
-                    <span aria-hidden="true">1️⃣</span> Exploración
-                </button>
-                <button type="button" role="tab" aria-selected="false" aria-controls="tab2" id="btn-tab2" class="tab-btn">
-                    <span aria-hidden="true">2️⃣</span> Alquimia AR
-                </button>
-                <button type="button" role="tab" aria-selected="false" aria-controls="tab3" id="btn-tab3" class="tab-btn">
-                    <span aria-hidden="true">3️⃣</span> Supervivencia
-                </button>
-            </div>
-
-            <div class="tabs-container card-panel">
-                <article id="tab1" role="tabpanel" aria-labelledby="btn-tab1" class="tab-content active">
-                    <div class="tab-header">
-                        <div class="tab-icon bg-agave" aria-hidden="true">🌱</div>
-                        <h3>Labranza Sagrada en 4 Fases</h3>
-                    </div>
-                    <p>Ara la tierra, siembra semillas sagradas, riega y cosecha copal para tus pócimas.</p>
-                    <ul class="mechanics-grid style-green">
-                        <li>Arar la parcela</li>
-                        <li>Sembrar semillas</li>
-                        <li>Regar con manantial</li>
-                        <li>Cosechar herbolaria</li>
+                    <ul class="feature-list">
+                        <li class="card animate-on-scroll"><div class="card-row"><span class="icon-dot" aria-hidden="true">🌿</span><div><h3>Arrastra los ingredientes</h3><p>Lleva las hierbas que cultivaste hasta el mortero, con ratón, mando o con el dedo.</p></div></div></li>
+                        <li class="card animate-on-scroll"><div class="card-row"><span class="icon-dot papel" aria-hidden="true">🥣</span><div><h3>Muele a tu manera</h3><p>Movimientos circulares o pulsaciones rítmicas para mezclar la medicina y curar a la fauna.</p></div></div></li>
+                        <li class="card animate-on-scroll"><div class="card-row"><span class="icon-dot agave" aria-hidden="true">♿</span><div><h3>Con opción de mantener pulsado</h3><p>Si los gestos repetitivos no son para ti, puedes mantener presionado el botón en lugar de girar o hacer clics.</p></div></div></li>
                     </ul>
-                </article>
-
-                <article id="tab2" role="tabpanel" aria-labelledby="btn-tab2" class="tab-content" hidden>
-                    <div class="tab-header">
-                        <div class="tab-icon bg-papel" aria-hidden="true">💖</div>
-                        <h3>Enfermería y Pócimas</h3>
-                    </div>
-                    <p>Diagnostica en la enfermería y prepara remedios para liberar a los animales del trauma.</p>
-                    <ul class="mechanics-grid style-pink">
-                        <li>Diagnóstico del animal</li>
-                        <li>Mezcla en molcajete AR</li>
-                        <li>Aplicación del remedio</li>
-                        <li>Liberación del espíritu</li>
-                    </ul>
-                </article>
-
-                <article id="tab3" role="tabpanel" aria-labelledby="btn-tab3" class="tab-content" hidden>
-                    <div class="tab-header">
-                        <div class="tab-icon bg-purple" aria-hidden="true">💀</div>
-                        <h3>Bullet Heaven nocturno</h3>
-                    </div>
-                    <p>Oleadas asedian el santuario; esquiva y ataca en automático utilizando formas nahuales.</p>
-                    <ul class="mechanics-grid style-purple">
-                        <li>Oleadas programadas</li>
-                        <li>Ataque automático</li>
-                        <li>Esquiva rápida</li>
-                        <li>Habilidades nahuales</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-
-        <!-- 4. Alquimia AR -->
-        <section id="alquimia" class="section-container bg-lightbg border-pattern-y" aria-labelledby="alquimia-title">
-            <div class="max-w-7xl about-grid">
-                <figure class="hero-figure card-panel">
-                    <img src="AlquimiaAR.png" loading="lazy" alt="Simulación de interfaz de Realidad Aumentada mostrando un molcajete sobre una carta física">
-                </figure>
-                
-                <div class="ar-content">
-                    <div class="badge">Experiencia Interactiva</div>
-                    <h2 id="alquimia-title" class="section-title">Alquimia Interactiva en AR</h2>
-                    <p class="section-subtitle">Tu mesa se convierte en el laboratorio del santuario.</p>
-                    
-                    <div class="about-cards">
-                        <article class="card-panel">
-                            <h3>📱 Apunta a tu carta física</h3>
-                            <p>Las cartas coleccionables funcionan como Target AR.</p>
-                        </article>
-                        <article class="card-panel">
-                            <h3>🥣 Muele en el Molcajete 3D</h3>
-                            <p>Un molcajete tridimensional se proyecta para moler hierbas.</p>
-                        </article>
-                    </div>
-
-                    <div class="qr-container center" style="margin-top: 2rem;">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://yolcatl.com/ar-demo" alt="Código QR para probar la experiencia WebAR" class="card-panel qr-code">
-                        <p style="margin-top: 1rem;"><strong>Escanea con tu móvil para probar WebAR</strong></p>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. Bestiario Completo (6 Nahuales) -->
-        <section id="metamorfosis" class="section-bestiario max-w-7xl" aria-labelledby="metamorfosis-title">
-            <h2 id="metamorfosis-title" class="section-title center">Bestiario y Formas Nahuales</h2>
-            <p class="section-subtitle center">Cada animal rescatado te presta su oficio de día y su poder de noche.</p>
-
-            <div class="info-alert" role="alert">
-                <span aria-hidden="true">💡</span> Cambia entre el Día y la Noche en el botón flotante para revelar los poderes ocultos
-            </div>
-
-            <div class="grid-features">
-                <!-- 1. Armadillo -->
-                <article class="card-panel bestiario-card border-top-gray">
-                    <header class="bestiario-header bg-gray-light">
-                        <h3>Armadillo</h3>
-                        <span aria-hidden="true">🪨</span>
-                    </header>
-                    <div class="bestiario-body">
-                        <div class="bestiario-hacienda">
-                            <h4>Hacienda (Día)</h4>
-                            <p>Despeja rocas en la granja y destruye obstáculos</p>
-                        </div>
-                        <div class="bestiario-defensa">
-                            <h4>Defensa (Noche)</h4>
-                            <p>Modo Rodante con aturdimiento en área</p>
-                        </div>
+        <!-- ¿Cómo se desbloquean los cosméticos AR? -->
+        <section id="ar" class="section container" aria-labelledby="ar-title">
+            <div class="split">
+                <div>
+                    <p class="eyebrow">Cosméticos opcionales</p>
+                    <div class="section-head" style="margin-bottom:var(--space-md)">
+                        <h2 id="ar-title">Tarjetas coleccionables y AR</h2>
+                        <p>Las tarjetas coleccionables de Yolcatl desbloquean disfraces para tu protagonista y sus animales mediante realidad aumentada.</p>
                     </div>
-                </article>
-
-                <!-- 2. Colibrí -->
-                <article class="card-panel bestiario-card border-top-pink">
-                    <header class="bestiario-header bg-pink-light">
-                        <h3>Colibrí</h3>
-                        <span aria-hidden="true">🌸</span>
-                    </header>
-                    <div class="bestiario-body">
-                        <div class="bestiario-hacienda">
-                            <h4>Hacienda (Día)</h4>
-                            <p>Poliniza y acelera radicalmente los cultivos</p>
-                        </div>
-                        <div class="bestiario-defensa">
-                            <h4>Defensa (Noche)</h4>
-                            <p>Dash evasivo ultra rápido y penetrante</p>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 3. Tlacuache -->
-                <article class="card-panel bestiario-card border-top-blue">
-                    <header class="bestiario-header bg-blue-light">
-                        <h3>Tlacuache</h3>
-                        <span aria-hidden="true">🌙</span>
-                    </header>
-                    <div class="bestiario-body">
-                        <div class="bestiario-hacienda">
-                            <h4>Hacienda (Día)</h4>
-                            <p>Cosecha múltiple e instantánea</p>
-                        </div>
-                        <div class="bestiario-defensa">
-                            <h4>Defensa (Noche)</h4>
-                            <p>Invisibilidad e inmunidad temporal</p>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 4. Pecarí -->
-                <article class="card-panel bestiario-card border-top-red">
-                    <header class="bestiario-header bg-red-light">
-                        <h3>Pecarí</h3>
-                        <span aria-hidden="true">🐗</span>
-                    </header>
-                    <div class="bestiario-body">
-                        <div class="bestiario-hacienda">
-                            <h4>Hacienda (Día)</h4>
-                            <p>Ara parcelas completas de un solo golpe</p>
-                        </div>
-                        <div class="bestiario-defensa">
-                            <h4>Defensa (Noche)</h4>
-                            <p>Embestida para dispersión masiva de hordas</p>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 5. Xoloitzcuintle -->
-                <article class="card-panel bestiario-card border-top-cyan">
-                    <header class="bestiario-header bg-cyan-light">
-                        <h3>Xoloitzcuintle</h3>
-                        <span aria-hidden="true">🐕</span>
-                    </header>
-                    <div class="bestiario-body">
-                        <div class="bestiario-hacienda">
-                            <h4>Hacienda (Día)</h4>
-                            <p>Rastrea y localiza animales heridos</p>
-                        </div>
-                        <div class="bestiario-defensa">
-                            <h4>Defensa (Noche)</h4>
-                            <p>Onda purificadora que cura área aliada</p>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 6. Ocelote -->
-                <article class="card-panel bestiario-card border-top-agave">
-                    <header class="bestiario-header bg-green-light">
-                        <h3>Ocelote</h3>
-                        <span aria-hidden="true">🐆</span>
-                    </header>
-                    <div class="bestiario-body">
-                        <div class="bestiario-hacienda">
-                            <h4>Hacienda (Día)</h4>
-                            <p>Duplica la recolección de herbolaria rara</p>
-                        </div>
-                        <div class="bestiario-defensa">
-                            <h4>Defensa (Noche)</h4>
-                            <p>Críticos garantizados y aura intimidante</p>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- 6. Galería (Carrusel con Javascript en main.js) -->
-        <section id="galeria" class="section-container max-w-7xl" aria-labelledby="galeria-title">
-            <h2 id="galeria-title" class="section-title center">Capturas de Pantalla</h2>
-            <p class="section-subtitle center">Explora los paisajes del santuario y el fragor del combate nocturno.</p>
-
-            <div class="carousel-wrapper">
-                <button class="carousel-btn prev" id="carousel-prev" aria-label="Anterior captura">&#10094;</button>
-                <div class="carousel-track" id="carousel-track">
-                    <figure class="carousel-item">
-                        <img src="screenshot1.webp" loading="lazy" alt="Área de siembra y cultivos en la hacienda" class="lightbox-trigger">
-                    </figure>
-                    <figure class="carousel-item">
-                        <img src="screenshot2.webp" loading="lazy" alt="Molienda herbolaria en el molcajete AR" class="lightbox-trigger">
-                    </figure>
-                    <figure class="carousel-item">
-                        <img src="screenshot3.webp" loading="lazy" alt="Combate nocturno Bullet Heaven contra la corrupción" class="lightbox-trigger">
-                    </figure>
+                    <ol class="feature-list steps">
+                        <li class="card animate-on-scroll"><h3>Consigue una tarjeta</h3><p>Cada tarjeta coleccionable lleva el arte de un cosmético.</p></li>
+                        <li class="card animate-on-scroll"><h3>Apunta tu cámara</h3><p>Abre la función AR del juego y enfoca la tarjeta con tu celular.</p></li>
+                        <li class="card animate-on-scroll"><h3>Desbloquea el disfraz</h3><p>El cosmético aparece en tu espacio y queda guardado para usarlo en el juego.</p></li>
+                    </ol>
+                    <p class="figure-cap">Son solo estéticos: no cambian la dificultad ni tu progreso. El juego completo se disfruta sin tarjetas.</p>
                 </div>
-                <button class="carousel-btn next" id="carousel-next" aria-label="Siguiente captura">&#10095;</button>
-            </div>
-        </section>
-
-        <!-- 7. Roadmap -->
-        <section id="roadmap" class="section-container border-pattern-y bg-lightbg" aria-labelledby="roadmap-title">
-            <div class="max-w-7xl">
-                <h2 id="roadmap-title" class="section-title center">Mapa de Ruta (Roadmap)</h2>
-                <p class="section-subtitle center">Progreso de desarrollo hacia el lanzamiento oficial.</p>
-
-                <ol class="timeline">
-                    <li class="timeline-item completed card-panel">
-                        <span class="badge">Q3 2026</span>
-                        <h3>GDD y Prototipo Alfa</h3>
-                        <p>Diseño de mecánicas base, sistema de alquimia y 6 formas nahuales.</p>
-                    </li>
-                    <li class="timeline-item completed card-panel">
-                        <span class="badge">Q4 2026</span>
-                        <h3>Demo WebAR y Landing Page</h3>
-                        <p>Prueba pública del APK de demostración y apertura de pre-reservas.</p>
-                    </li>
-                    <li class="timeline-item future card-panel">
-                        <span class="badge">Q1 2027</span>
-                        <h3>Beta Cerrada en Android</h3>
-                        <p>Pruebas de balance de horda nocturna y colección de cartas impresas.</p>
-                    </li>
-                    <li class="timeline-item future card-panel">
-                        <span class="badge">Q2 2027</span>
-                        <h3>Lanzamiento Global</h3>
-                        <p>Estreno oficial en Tiendas Digitales y expansión de bioma Selva Maya.</p>
-                    </li>
-                </ol>
-            </div>
-        </section>
-
-        <!-- 8. Precios -->
-        <section id="precios" class="section-container max-w-7xl center" aria-labelledby="precios-title">
-            <h2 id="precios-title" class="section-title">Paquete de Inicio</h2>
-            
-            <article class="card-panel pricing-card" style="max-width: 500px; margin: 0 auto;">
-                <span class="badge" style="background: #000; color: #fff;">-30% Prelanzamiento</span>
-                <h3 class="font-heading" style="font-size: 2rem; margin: 1rem 0;">Edición Fundador</h3>
-                <ul style="text-align: left; margin: 1.5rem 0; font-weight: bold; line-height: 2;">
-                    <li>✅ 500 Orbes Místicos</li>
-                    <li>✅ 3 cartas AR exclusivas</li>
-                    <li>✅ Skin «Alebrije Nocturno»</li>
-                    <li>✅ Acceso anticipado al santuario</li>
-                </ul>
-                <div style="font-size: 2.5rem; font-weight: bold; color: var(--color-marigold); margin-bottom: 1rem;">
-                    $349 MXN <del style="font-size: 1.2rem; color: #666;">$499 MXN</del>
+                <div class="phone animate-on-scroll">
+                    <img src="assets/ar-tarjeta.svg" width="400" height="800" loading="lazy" alt="Simulación de la interfaz de realidad aumentada mostrando un disfraz proyectado sobre una tarjeta coleccionable">
+                    <div class="phone-ui" aria-hidden="true"><span>📷</span><span>AR</span></div>
                 </div>
-                <a href="https://itch.io" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">
-                    Reservar Paquete<span class="sr-only"> (se abre en ventana nueva)</span>
-                </a>
-            </article>
+            </div>
         </section>
 
-    </main>
+        <!-- US-07 · ¿Qué animales y poderes hay? -->
+        <section id="metamorfosis" class="section section-alt" aria-labelledby="metamorfosis-title">
+            <div class="container">
+                <div class="section-head animate-on-scroll" style="margin-inline:auto;text-align:center">
+                    <h2 id="metamorfosis-title">Bestiario y formas nahuales</h2>
+                    <p>Cada animal rescatado te presta su oficio de día y su poder de noche.</p>
+                </div>
+                <p class="reveal-note"><span aria-hidden="true">💡</span> Cambia entre Día y Noche con el botón flotante para revelar los poderes de defensa.</p>
+                <div class="cards-grid">
+                    <article class="card beast c1 animate-on-scroll">
+                        <div class="beast-head"><h3>Armadillo</h3><span aria-hidden="true">🪨</span></div>
+                        <p class="power-label label-hacienda">Hacienda</p><p class="power power-hacienda">Rompe rocas y despeja terreno fácilmente.</p>
+                        <p class="power-label defensa label-defensa">Defensa · Modo Rodante</p><p class="power power-defensa">Embiste a gran velocidad, derribando y aturdiendo hordas.</p>
+                    </article>
+                    <article class="card beast c2 animate-on-scroll">
+                        <div class="beast-head"><h3>Colibrí</h3><span aria-hidden="true">🌸</span></div>
+                        <p class="power-label label-hacienda">Hacienda</p><p class="power power-hacienda">Acelera el crecimiento de los cultivos al volar sobre ellos.</p>
+                        <p class="power-label defensa label-defensa">Defensa · Impulso Espiritual</p><p class="power power-defensa">Esquive veloz para escapar cuando te rodean las Entidades.</p>
+                    </article>
+                    <article class="card beast c3 animate-on-scroll">
+                        <div class="beast-head"><h3>Tlacuache</h3><span aria-hidden="true">🌙</span></div>
+                        <p class="power-label label-hacienda">Hacienda</p><p class="power power-hacienda">Cosecha las parcelas en una sola acción.</p>
+                        <p class="power-label defensa label-defensa">Defensa · Fingir Muerte</p><p class="power power-defensa">Invisible e inmune a las Entidades por unos segundos (una vez por noche).</p>
+                    </article>
+                    <article class="card beast c4 animate-on-scroll">
+                        <div class="beast-head"><h3>Pecarí</h3><span aria-hidden="true">🐗</span></div>
+                        <p class="power-label label-hacienda">Hacienda</p><p class="power power-hacienda">Ara todas las parcelas en una acción.</p>
+                        <p class="power-label defensa label-defensa">Defensa · Embestida Salvaje</p><p class="power power-defensa">Carga frontal que dispersa y empuja a grupos de sombras.</p>
+                    </article>
+                    <article class="card beast c5 animate-on-scroll">
+                        <div class="beast-head"><h3>Xoloitzcuintle</h3><span aria-hidden="true">🐕</span></div>
+                        <p class="power-label label-hacienda">Hacienda</p><p class="power power-hacienda">Detecta rápidamente animales heridos en las zonas de exploración.</p>
+                        <p class="power-label defensa label-defensa">Defensa · Ladrido Sagrado</p><p class="power power-defensa">Onda expansiva que disuelve Entidades menores y revela premios y semillas.</p>
+                    </article>
+                    <article class="card beast c6 animate-on-scroll">
+                        <div class="beast-head"><h3>Ocelote</h3><span aria-hidden="true">🐆</span></div>
+                        <p class="power-label label-hacienda">Hacienda</p><p class="power power-hacienda">Aumenta la probabilidad de obtener doble recolección al cosechar.</p>
+                        <p class="power-label defensa label-defensa">Defensa · Aura de intimidación</p><p class="power power-defensa">Las Entidades retroceden y avanzan en dirección contraria.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-    <!-- 9. Comunidad y Footer -->
-    <footer id="comunidad" class="main-footer border-pattern-y">
-        <div class="max-w-7xl footer-grid">
-            
-            <!-- Newsletter (Con los campos que maneja main.js) -->
-            <div class="footer-brand">
-                <img src="logo.jpg" alt="Logotipo de Yolcatl" class="footer-logo">
-                <p>Únete a «Los Murmullos del Bosque» para recibir noticias exclusivas y acceso a la beta.</p>
+        <!-- US-32 · ¿Puedo probarlo en mi equipo? -->
+        <section id="demo" class="section section-soft" aria-labelledby="demo-title">
+            <div class="container">
+                <div class="section-head animate-on-scroll">
+                    <h2 id="demo-title">Prueba la demo</h2>
+                    <p>Un juego para una persona, hecho para correr bien en equipos modestos.</p>
+                </div>
+                <div class="demo-grid">
+                    <article class="card animate-on-scroll">
+                        <p class="tag-gold">Optimizado para correr en gama baja</p>
+                        <h3 class="card-title">Demo jugable</h3>
+                        <p>Funciona sin conexión a internet y sin launcher: descargas, abres y juegas.</p>
+                        <dl class="spec">
+                            <div><dt>Plataformas</dt><dd>Android (APK) · PC en preparación</dd></div>
+                            <div><dt>Modo</dt><dd>Un jugador, 100 % sin conexión</dd></div>
+                            <div><dt>Controles</dt><dd>Teclado y ratón, mando o táctil</dd></div>
+                            <div><dt>Requisitos mínimos</dt><dd>Por confirmar</dd></div>
+                            <div><dt>Peso de la descarga</dt><dd>Por confirmar</dd></div>
+                        </dl>
+                        <a href="Yolcatl-Demo.apk" download class="btn btn-lg btn-block" data-track="cta_demo_descarga">Probar la demo<span class="sr-only"> (descargar APK para Android)</span></a>
+                    </article>
+                    <article class="card animate-on-scroll">
+                        <p class="tag-gold">Registro anticipado</p>
+                        <h3 class="card-title">Los Murmullos del Bosque</h3>
+                        <p>Regístrate y recibe fichas botánicas y mitológicas, lore y fechas de pruebas.</p>
+                        <div class="milestone">
+                            <progress id="meter" class="meter" max="5000" value="0" aria-labelledby="meter-text">0</progress>
+                            <p class="milestone-text" id="meter-text"><span id="meter-count">Cargando registros…</span><span>Meta: 5,000</span></p>
+                            <p class="hint">Si llegamos a 5,000 registros, todas las personas registradas desbloquean un accesorio exclusivo para animales dentro del juego.</p>
+                        </div>
+                        <form id="newsletter-form" class="form" novalidate>
+                            <div class="field">
+                                <label for="news-email">Correo electrónico</label>
+                                <input id="news-email" name="email" type="email" class="input" autocomplete="email" placeholder="tu@correo.com" required>
+                            </div>
+                            <button type="submit" class="btn btn-block" data-track="newsletter">Quiero registrarme</button>
+                            <p id="news-feedback" class="form-status" role="status" aria-live="polite"></p>
+                        </form>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-                <form id="newsletter-form" class="newsletter-form" novalidate>
-                    <div class="form-group">
-                        <label for="name-input">Nombre de usuario o Nahual:</label>
-                        <input id="name-input" type="text" name="name" required class="form-input" placeholder="Tu nombre o apodo" aria-invalid="false">
+        <!-- US-08 · ¿Cómo contacto al equipo? -->
+        <section id="contacto" class="section container" aria-labelledby="contacto-title">
+            <div class="split">
+                <div class="section-head animate-on-scroll" style="margin-bottom:0">
+                    <h2 id="contacto-title">Contacto</h2>
+                    <p>Prensa, colaboraciones o dudas: cuéntanos y te respondemos. Si eres creador de contenido, descarga también el <a href="KitPrensa.zip" download>Kit de Prensa</a>.</p>
+                </div>
+                <form id="contact-form" class="form card" action="#" method="post" novalidate>
+                    <div class="field">
+                        <label for="name">Nombre</label>
+                        <input id="name" name="name" type="text" class="input" required minlength="2" maxlength="100" autocomplete="name">
                     </div>
-
-                    <div class="form-group">
-                        <label for="email-input">Correo electrónico:</label>
-                        <input id="email-input" type="email" name="email" autocomplete="email" required class="form-input" placeholder="tu@correo.com" aria-invalid="false">
+                    <div class="field">
+                        <label for="email">Correo electrónico</label>
+                        <input id="email" name="email" type="email" class="input" required autocomplete="email">
                     </div>
-
-                    <div class="form-group">
-                        <label for="message-input">¿Por qué te entusiasma YOLCATL?:</label>
-                        <textarea id="message-input" name="message" class="form-input form-textarea" placeholder="Escribe tu mensaje..."></textarea>
+                    <div class="field">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" class="input" required minlength="10" maxlength="1000"></textarea>
                     </div>
-
-                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Suscribirme a la Newsletter</button>
-                    <div id="form-feedback" aria-live="polite" class="feedback-msg"></div>
+                    <button type="submit" class="btn btn-lg" data-track="contacto">Enviar</button>
+                    <p id="form-feedback" class="form-status" role="status" aria-live="polite"></p>
                 </form>
             </div>
+        </section>
+    </main>
 
-            <!-- Enlaces Secundarios -->
-            <nav aria-label="Enlaces secundarios">
-                <h2 class="footer-title">EXPLORA</h2>
-                <ul class="footer-links">
-                    <li><a href="#hacienda">La Hacienda</a></li>
-                    <li><a href="#ciclo">Ciclo de Juego</a></li>
-                    <li><a href="#metamorfosis">Metamorfosis</a></li>
-                    <li><a href="#galeria">Galería</a></li>
-                </ul>
-            </nav>
-
-            <nav aria-label="Enlaces de creadores">
-                <h2 class="footer-title">CREADORES</h2>
-                <ul class="footer-links">
-                    <li><a href="KitPrensa.zip" download="KitPrensa.zip">Kit de Prensa <span class="sr-only">(ZIP)</span></a></li>
-                    <li><a href="https://discord.com" target="_blank" rel="noopener noreferrer">Discord Oficial</a></li>
-                    <li><a href="mailto:contacto@yolcatl.com">Contacto</a></li>
-                    <li><a href="https://nahuatl.wired-humanities.org" target="_blank" rel="noopener noreferrer">Glosario Náhuatl</a></li>
-                </ul>
-            </nav>
-        </div>
-        
-        <div class="footer-bottom max-w-7xl">
-            <p>© 2026 YOLCATL. Todos los derechos reservados.</p>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/logo.jpg" alt="Logotipo de Yolcatl" width="900" height="145">
+                    <p>Cozy farming y bullet heaven con herbolaria, alebrijes y nahuales. Hecho con respeto a la cultura mesoamericana.</p>
+                </div>
+                <nav aria-label="Explorar el sitio">
+                    <h2>Explora</h2>
+                    <ul class="footer-list">
+                        <li><a href="#hacienda">Historia</a></li>
+                        <li><a href="#ciclo">Ciclo de juego</a></li>
+                        <li><a href="#alquimia">Alquimia</a></li>
+                        <li><a href="#metamorfosis">Bestiario</a></li>
+                        <li><a href="#demo" data-track="cta_demo_footer">Probar la demo</a></li>
+                    </ul>
+                </nav>
+                <nav aria-label="Recursos para creadores">
+                    <h2>Creadores</h2>
+                    <ul class="footer-list">
+                        <li><a href="KitPrensa.zip" download>Kit de Prensa<span class="sr-only"> (descargar archivo ZIP)</span></a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="https://nahuatl.wired-humanities.org" target="_blank" rel="noopener noreferrer">Glosario náhuatl<span class="sr-only"> (se abre en una pestaña nueva)</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+            <p class="footer-bottom">&copy; 2026 Yolcatl. Todos los derechos reservados.</p>
         </div>
     </footer>
-
-    <!-- Modales Globales controlados por main.js -->
-    
-    <!-- Modal: Lightbox de Galería -->
-    <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true" role="dialog" aria-label="Vista ampliada de imagen">
-        <button id="lightbox-close" class="lightbox-close" aria-label="Cerrar imagen ampliada">&times;</button>
-        <img id="lightbox-img" src="" alt="" class="lightbox-content">
-    </div>
-
-    <!-- Modal: Login / Recompensas -->
-    <dialog id="login-dialog" aria-labelledby="login-title" class="modal-dialog card-panel">
-        <div class="modal-header">
-            <h2 id="login-title" style="font-family: var(--font-heading);">Iniciar sesión</h2>
-            <button type="button" class="btn-close" id="btn-close-login" aria-label="Cerrar ventana">&times;</button>
-        </div>
-        <p class="modal-desc">Entra para reclamar tu recompensa diaria.</p>
-        <form id="login-form" class="modal-form">
-            <div class="form-group">
-                <label for="login-email">Correo electrónico</label>
-                <input id="login-email" type="email" required placeholder="tu@correo.com" class="form-input">
-            </div>
-            <div class="form-group">
-                <label for="login-password">Contraseña</label>
-                <input id="login-password" type="password" required placeholder="Tu contraseña" class="form-input">
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Entrar</button>
-        </form>
-    </dialog>
-
 </body>
 </html>

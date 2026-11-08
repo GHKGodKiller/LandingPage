@@ -1,238 +1,377 @@
 # Product Backlog: YOLCATL
-## US-01: Hero Section & Llamado a la Acción (CTA)
-**Como** jugador potencial o visitante que llega por primera vez al sitio web,  
-**quiero** visualizar de forma inmediata el título, el tagline del juego y botones claros de llamada a la acción en la sección Hero,  
-**para** entender de inmediato la propuesta de valor del juego y probar la demo o ver el tráiler promocional sin rodeos.
+
+## E0 · Metodología y Gestión
+
+## US-01: Backlog, CA y Definition of Done
+**Como** equipo de desarrollo,  
+**quiero** un backlog con User Stories, Criterios de Aceptación y una Definition of Done,  
+**para** verificar el producto contra la especificación y confirmar las decisiones de diseño desde el inicio.
 
 ### Criterios de Aceptación (CA):
-- **CA-1:** La sección Hero debe incluir un título principal `<h1>` visible, un subtítulo descriptivo del género (*Cozy Farming & Bullet Heaven*) y dos botones primarios de CTA ("Descargar Demo" APK y "Ver Tráiler").
-- **CA-2:** El botón "Descargar Demo" debe iniciar la descarga directa del archivo ejecutable o APK del juego de forma transparente.
-- **CA-3:** El botón "Ver Tráiler" debe abrir una pestaña externa hacia la plataforma de video (YouTube/Vimeo) configurada con atributos `target="_blank"` y `rel="noopener noreferrer"`.
+- **CA-1:** El backlog debe seguir el formato «Como… quiero… para…» con al menos 2 CA medibles por historia.
+- **CA-2:** Todas las decisiones abiertas (D-01 a D-10, como la plataforma de la demo y exclusión de registro/precio) deben quedar resueltas y documentadas antes de iniciar el código.
+- **CA-3:** Todo cambio de alcance debe registrarse como una US/CA nueva con fecha de versión.
+
+## US-02: Tablero Trello y evidencias
+**Como** equipo de desarrollo,  
+**quiero** un tablero Trello activo con el backlog y capturas de evidencia,  
+**para** demostrar la gestión Agile y cumplir con los criterios de evaluación.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** El tablero debe incluir las listas: Product Backlog, Sprint Backlog, En progreso, En revisión y Hecho.
+- **CA-2:** Cada US debe ser una tarjeta con sus CA como *checklist*, responsables y etiquetas.
+- **CA-3:** Deben adjuntarse al menos 2 capturas ShareX por sprint para evidenciar el progreso.
+
+## US-03: Context Brain y Creación de Assets Faltantes
+**Como** integrante del equipo que retoma el trabajo,  
+**quiero** una carpeta de contexto organizada y un inventario de *assets* completos,  
+**para** continuar el desarrollo sin releer PDFs y contar con todos los recursos gráficos necesarios.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** La carpeta `/docs/context/` debe contener el lore, paleta, glosario y decisiones actualizadas.
+- **CA-2:** Se debe generar y compilar formalmente el material faltante: `KitPrensa.zip`, imágenes conceptuales y el clip/enlace de gameplay (mitigando el riesgo R-01).
+- **CA-3:** Cada archivo del Context Brain debe indicar su fuente original (GDD o Plan de Marketing).
 
 ---
 
-## US-02: Navegación Semántica y Accesible
-**Como** usuario con requerimientos de accesibilidad o navegación por teclado,  
-**quiero** disponer de una barra de navegación superior accesible con enlaces ancla hacia las secciones principales,  
-**para** desplazarme fluidamente por la página y saltar directamente a las áreas de mi interés.
+## E1 · Estructura Semántica
+
+## US-04: Hero con nombre, género y promesa
+**Como** Pato (jugador casual con laptop modesta),  
+**quiero** ver al abrir la página el nombre del juego, su género y una promesa clara con botón de acción,  
+**para** decidir en los primeros 5 segundos si Yolcatl me interesa.
 
 ### Criterios de Aceptación (CA):
-- **CA-1:** El menú de navegación debe implementarse con el elemento semántico `<nav>` y enlaces `<a>` apuntando a los identificadores (`#hacienda`, `#ciclo`, `#alquimia`, `#metamorfosis`).
-- **CA-2:** En pantallas con ancho menor o igual a 768px (móviles/tablets), el menú debe reorganizarse verticalmente (*stack flexbox*) sin provocar scroll horizontal.
-- **CA-3:** La página debe incluir un enlace semántico visible únicamente mediante foco por teclado (`.sr-only:focus`) que permita saltar directamente al contenido principal (`#contenido`).
+- **CA-1:** Debe existir un único `<h1>` en la página dentro de un `<section id="hero" aria-labelledby="hero-title">`.
+- **CA-2:** Debe incluir un pitch de máximo 40 palabras, sin texto "Lorem ipsum".
+- **CA-3:** Los CTA principal y secundario deben apuntar a `#demo` y `#showcase` respectivamente.
 
----
-
-## US-03: Gameplay & Características Principales (Ciclo de Juego)
-**Como** jugador exigente o reviewer de videojuegos indie,  
-**quiero** explorar una sección interactiva sobre las fases del ciclo de juego (Exploración, Alquimia AR y Supervivencia Nocturna),  
-**para** comprender la profundidad de las mecánicas principales y la innovación del proyecto.
+## US-05: Navegación semántica y por teclado
+**Como** visitante que navega con teclado o lector de pantalla,  
+**quiero** una barra de navegación con enlaces ancla y un enlace para saltar al contenido,  
+**para** llegar rápido a lo que busco sin usar el mouse.
 
 ### Criterios de Aceptación (CA):
-- **CA-1:** La sección debe implementar un componente de pestañas (*Tabs*) accesible mediante roles WAI-ARIA (`role="tablist"`, `role="tab"`, `role="tabpanel"`).
-- **CA-2:** Las pestañas deben ser navegables mediante teclado utilizando las teclas de flecha izquierda/derecha, tecla *Inicio* y *Fin*.
-- **CA-3:** Cada pestaña activa debe mostrar de forma dinámica sus 4 subfases o mecánicas clave con retroalimentación visual clara.
+- **CA-1:** El `<header>` debe contener un `<nav aria-label="Navegación principal">` con enlaces válidos a cada id de sección.
+- **CA-2:** El enlace «Saltar al contenido» debe ser el primer elemento enfocable y llevar al `<main>`.
+- **CA-3:** La navegación (Tab) debe seguir un orden lógico sin trampas de foco.
 
----
-
-## US-04: Lore, Sinopsis y Bestiario Nahual
-**Como** aficionado a las narrativas y la cultura mexicana,  
-**quiero** consultar el contexto argumental y las transformaciones de las criaturas (Bestiario),  
-**para** conocer la historia del mundo y cómo las habilidades de los animales cambian entre el día y la noche.
+## US-06: Historia y propuesta de valor
+**Como** Lía (creadora botánica que ama el folclore),  
+**quiero** una sección que cuente la historia del Pajianí y los 4 pilares de valor,  
+**para** tener lore profundo que compartir con mi comunidad.
 
 ### Criterios de Aceptación (CA):
-- **CA-1:** La sección del Bestiario debe renderizarse utilizando un contenedor con CSS Grid responsivo (1 columna en móvil, 2 en tablet, 3-4 en desktop).
-- **CA-2:** La información de las habilidades de cada criatura debe conmutarse dinámicamente entre el modo Hacienda (Día) y modo Defensa (Noche) al reaccionar al estado del tema activo (`.dark` / `.light`).
-- **CA-3:** Cada tarjeta del Bestiario debe mantener un borde distintivo que identifique el tipo de criatura respetando la paleta de colores del sistema de diseño.
+- **CA-1:** Debe existir la sección `#hacienda` con al menos 3 `<article>` (Visión, Hacienda, Guardianes).
+- **CA-2:** Se deben listar los 4 pilares del GDD y usar ortografía unificada ("Pajianí") sin definiciones largas in-line.
+- **CA-3:** Las imágenes de apoyo deben estructurarse usando `<figure>`, `<figcaption>` y el atributo `alt`.
 
----
-
-## US-05: Galería de Medios y Conmutación Visual (Día/Noche)
-**Como** creador de contenido o publisher,  
-**quiero** alternar entre el modo Claro (Día) y Oscuro (Noche) mediante un interruptor flotante o preferencia de sistema,  
-**para** visualizar el contraste estético de la hacienda colonial y verificar el acabado visual del juego.
+## US-07: Características del juego
+**Como** Bob (coleccionista ocupado),  
+**quiero** ver en tarjetas las mecánicas del ciclo día/noche, alquimia y formas nahuales,  
+**para** entender la jugabilidad rápidamente.
 
 ### Criterios de Aceptación (CA):
-- **CA-1:** El sitio debe detectar automáticamente la preferencia del sistema operativo mediante la media query `@media (prefers-color-scheme: dark)`.
-- **CA-2:** El conmutador flotante debe permitir el cambio manual de tema persistiéndolo en el almacenamiento local (`localStorage.setItem('yolcatl-theme')`).
-- **CA-3:** La imagen del Hero debe conmutarse automáticamente entre `HaciendaDia.png` y `HaciendaNoche.png` en sincronía con el tema seleccionado.
+- **CA-1:** Deben existir las secciones `#ciclo`, `#alquimia` y `#metamorfosis` respetando la jerarquía de encabezados (`h2` a `h3`).
+- **CA-2:** La sección de alquimia debe reflejar el uso táctil (arrastre/rotación) del molcajete como se indica en el GDD.
+- **CA-3:** El bestiario debe documentar las 6 formas nahuales (Armadillo, Tlacuache, Colibrí, Pecarí, Xoloitzcuintle, Ocelote) con sus oficios diurnos y defensas.
 
----
-
-## US-06: Comunidad y Registro a Newsletter
-**Como** miembro de la comunidad gamer,  
-**quiero** suscribirme con mi correo electrónico a la newsletter del estudio,  
-**para** recibir noticias sobre fechas de beta, lore exclusivo y actualizaciones del desarrollo.
+## US-08: Formulario de contacto y newsletter
+**Como** Lía (busca el Kit de Prensa),  
+**quiero** un formulario de contacto y suscripción a la newsletter,  
+**para** comunicarme con el equipo o recibir actualizaciones del juego.
 
 ### Criterios de Aceptación (CA):
-- **CA-1:** El formulario de suscripción debe contar con un campo de entrada de tipo `email` validado con atributos `required` y etiqueta accesible `<label>`.
-- **CA-2:** El envío del formulario debe comunicarse de manera asíncrona mediante un `POST` al endpoint `/subscribe` gestionado por el servidor Express/SQLite.
-- **CA-3:** El sistema debe notificar el resultado (suscripción exitosa, correo duplicado o error de servidor) mediante un componente dinámico de tipo Toast sin recargar la página.
+- **CA-1:** La sección `#contacto` debe incluir un `<form>` con campos de `name`, `email` y `message` enlazados mediante `<label for>`.
+- **CA-2:** Los campos deben incluir validación HTML5 (`required`, `type="email"`, `minlength`) y atributos `autocomplete`.
+- **CA-3:** Debe existir un contenedor `role="status" aria-live="polite"` para mostrar los mensajes de respuesta.
 
----
-
-## US-07: Footer Institucional, Créditos y Glosario
-**Como** visitante o periodista de la industria,  
-**quiero** acceder a los enlaces de soporte, kit de prensa, glosario lingüístico y canales sociales en el pie de página,  
-**para** ponerme en contacto con el estudio desarrollador o descargar recursos oficiales de cobertura.
-
-### Criterios de Aceptación (CA):
-- **CA-1:** El pie de página debe organizarse utilizando el elemento semántico `<footer>` con enlaces divididos en columnas semánticas ("EXPLORA" y "CREADORES").
-- **CA-2:** Debe incluir enlaces de descarga directa para el archivo `KitPrensa.zip` y accesos externos a las comunidades de Discord e itch.io.
-- **CA-3:** Todos los enlaces externos e interactivos del footer deben contar con estados de foco visibles y textos alternativos para lectores de pantalla.
-
----
-
-## US-08: Soporte Multiidioma
-**Como** jugador internacional o publisher extranjero,  
-**quiero** poder cambiar el idioma de la página entre Español e Inglés mediante un selector,  
-**para** comprender completamente la historia, las mecánicas del juego y los pasos para descargar la demo en mi idioma nativo.
-
-### Criterios de Aceptación (CA):
-- **CA-1:** Se debe implementar un selector de idioma (ES/EN) accesible en la barra de navegación superior con iconos de banderas o texto abreviado.
-- **CA-2:** La elección de idioma del usuario debe guardarse en `localStorage` (`yolcatl-lang`) para que se mantenga persistentemente en futuras visitas.
-- **CA-3:** Todos los textos del sitio (titulares, botones, descripciones de bestiario) deben cargarse dinámicamente desde archivos JSON de traducción sin recargar la página.
-
----
-
-## US-09: Roadmap de Desarrollo
-**Como** fan del proyecto o posible inversor,  
-**quiero** visualizar un mapa de ruta (Roadmap) del desarrollo en forma de línea de tiempo,  
-**para** saber en qué fase se encuentra el juego actualmente y cuándo se esperan las próximas betas o el lanzamiento final.
-
-### Criterios de Aceptación (CA):
-- **CA-1:** La línea de tiempo debe renderizarse con un diseño vertical en dispositivos móviles y horizontal o en zigzag en pantallas de escritorio.
-- **CA-2:** Los hitos completados deben diferenciarse visualmente (iconos con check, colores sólidos) de los hitos futuros (líneas punteadas, colores translúcidos).
-- **CA-3:** Los elementos de la línea de tiempo deben incluir una animación de entrada (fade-in) vinculada al scroll usando Intersection Observer.
-
----
-
-## US-10: Carrusel Interactivo de Capturas de Pantalla
-**Como** visitante interesado en el arte visual del juego,  
-**quiero** explorar una galería de capturas de pantalla de alta resolución mediante un carrusel,  
-**para** apreciar los detalles gráficos de la hacienda y el caos de los combates Bullet Heaven nocturnos.
-
-### Criterios de Aceptación (CA):
-- **CA-1:** El carrusel debe permitir la navegación mediante gestos de deslizamiento (*swipe*) en móviles y botones de flechas en escritorio.
-- **CA-2:** Al hacer clic en una imagen, esta debe abrirse en un componente Modal (Lightbox) a pantalla completa con botón de cierre y soporte para la tecla *Escape*.
-- **CA-3:** Las imágenes de la galería deben implementar `loading="lazy"` y formato WebP para evitar penalizaciones en el tiempo de carga (LCP).
-
----
-
-## US-11: Vista Previa Escaneable de Alquimia AR
-**Como** usuario navegando desde una computadora de escritorio,  
-**quiero** ver un código QR dinámico en la sección de "Alquimia AR",  
-**para** escanearlo con mi móvil y probar una pequeña demostración de realidad aumentada web sin instalar nada.
-
-### Criterios de Aceptación (CA):
-- **CA-1:** En resoluciones de escritorio (>768px), la sección AR debe generar y mostrar un código QR que apunte a la URL WebAR.
-- **CA-2:** En resoluciones móviles, el código QR debe ocultarse y reemplazarse por un botón principal que diga "Probar Filtro AR Ahora".
-- **CA-3:** Al acceder a la URL de la demo, la aplicación debe solicitar los permisos de cámara y manejar rechazos con mensajes amigables.
-
----
-
-## US-12: Optimización SEO y Tarjetas Sociales
-**Como** encargado de marketing del estudio indie,  
-**quiero** que la página cuente con meta etiquetas configuradas para redes sociales,  
-**para** que al compartir el enlace en Twitter, Discord o WhatsApp, se genere automáticamente una tarjeta visual atractiva.
-
-### Criterios de Aceptación (CA):
-- **CA-1:** La cabecera `<head>` debe incluir etiquetas Open Graph (`og:title`, `og:description`, `og:image`) y Twitter Cards.
-- **CA-2:** La imagen definida en `og:image` debe tener una resolución recomendada de 1200x630 píxeles.
-- **CA-3:** El documento HTML debe mantener una jerarquía de encabezados (`<h1>` a `<h3>`) bien estructurada y puntuar >90 en SEO en Lighthouse.
-
----
-
-## US-13: Sistema de Diseño Base, Variables CSS & Reset Global
-**Como** diseñador UI/UX y desarrollador web,  
-**quiero** establecer un sistema de tokens en `:root` con un reset CSS unificado y regla global `box-sizing: border-box`,  
-**para** evitar desbordamientos inesperados, eliminar inconsistencias de navegadores y garantizar que el sitio cargue fuentes profesionales legibles.
-
-### Criterios de Aceptación (CA):
-- **CA-1:** Todo el archivo CSS debe aplicar la regla `*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }`.
-- **CA-2:** Se deben definir en `:root` las variables de color del Pitch Deck: Papel Pink (`#E4007C`), Marigold Orange (`#FF7F00`), Talavera Blue (`#003893`), así como escalas de espaciado, bordes y sombras.
-- **CA-3:** El documento debe cargar e implementar una tipografía legible de Google Fonts (*Outfit* o *Plus Jakarta Sans*) vinculada al `font-family` principal del `body`.
-
----
-
-## US-14: Layouts Responsivos Integrales Mobile-First (Flexbox & Grid)
-**Como** usuario que navega desde cualquier dispositivo (móvil 320px, tablet 768px o desktop 1024px+),  
-**quiero** que el layout se adapte mediante Flexbox y CSS Grid sin generar scroll horizontal en ningún punto de la pantalla,  
-**para** navegar la landing page con fluidez y perfecta legibilidad.
-
-### Criterios de Aceptación (CA):
-- **CA-1:** El menú de navegación debe usar Flexbox (stack vertical en móvil <768px, distribución horizontal con logo a la izquierda y links a la derecha en desktop).
-- **CA-2:** La sección de características y Bestiario debe usar CSS Grid con 1 columna en móvil (320px), 2 en tablet (768px) y 3-4 columnas en desktop (1024px+).
-- **CA-3:** El área Hero debe estar centrada vertical y horizontalmente mediante Flexbox/Grid responsivo y probarse sin scroll horizontal entre 320px y 1280px.
-
----
-
-## US-15: Estilización Temática Avanzada de Secciones
+## US-09: Footer y enlaces de comunidad
 **Como** visitante,  
-**quiero** que cada sección del sitio (Hero, Tarjetas, About, Contacto/Newsletter, Footer) presente un acabado gráfico pulido con gradientes de marca y estados visuales explícitos,  
-**para** tener una experiencia inmersiva alineada a la estética Pop-Folclórica de YOLCATL.
+**quiero** un pie de página con recursos, Kit de Prensa y redes sociales,  
+**para** encontrar la comunidad oficial del juego fácilmente.
 
 ### Criterios de Aceptación (CA):
-- **CA-1:** La sección Hero debe incluir un fondo con gradiente atractivo generado para la marca (`#003893` a `#E4007C`) y un botón CTA con efecto `:hover`.
-- **CA-2:** Las tarjetas de características deben incluir sombras dinámicas, bordes de acento (`var(--marigold-orange)`) e indicadores visuales de categoría.
-- **CA-3:** El formulario de suscripción debe mostrar estados de `:focus-visible` con un contorno nítido de alta visibilidad en campos e insumos.
+- **CA-1:** Debe existir un único `<footer>` con enlaces que abran externamente (`target="_blank" rel="noopener noreferrer"`) y adviertan a lectores de pantalla.
+- **CA-2:** No deben existir enlaces genéricos a portadas (itch.io vacío); deben ser URL finales.
+- **CA-3:** Los enlaces a descargables (`KitPrensa.zip`) deben resolver correctamente a los *assets* generados en la US-03.
+
+## US-10: HTML válido y accesibilidad (Retos 1 y 2)
+**Como** persona usuaria de lector de pantalla,  
+**quiero** una página con HTML semánticamente válido,  
+**para** navegar sin barreras de accesibilidad.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** El código debe registrar 0 errores y 0 warnings en el W3C Markup Validator.
+- **CA-2:** Lighthouse Accessibility debe puntuar ≥ 90 en móvil y escritorio.
+- **CA-3:** Todas las imágenes decorativas deben usar `alt=""` y el atributo `lang="es"` debe estar definido en el HTML.
+
+## US-11: Prueba con lector de pantalla (Reto 3)
+**Como** equipo de desarrollo,  
+**quiero** probar la landing con Narrador/VoiceOver,  
+**para** documentar y resolver hallazgos reales de usabilidad auditiva.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** Debe existir el documento `accesibilidad-notas.md` detallando la experiencia de navegación por landmarks y encabezados.
+- **CA-2:** Cada hallazgo debe registrarse con su respectiva corrección implementada.
 
 ---
 
-## US-16: Modo Oscuro Automático y Accesibilidad de Contraste
-**Como** usuario con preferencia de visualización nocturna en mi sistema operativo,  
-**quiero** que el sitio reaccione automáticamente con la media query `@media (prefers-color-scheme: dark)`,  
-**para** navegar cómodamente en baja luz sin perder legibilidad ni violar el contraste mínimo requeridos por la norma WCAG.
+## E2 · Diseño y Responsividad
+
+## US-12: Sistema de diseño (tokens, reset, tipografía)
+**Como** equipo de desarrollo,  
+**quiero** un sistema de diseño mediante variables CSS y tipografía importada,  
+**para** mantener coherencia visual basada en la paleta del GDD.
 
 ### Criterios de Aceptación (CA):
-- **CA-1:** El sitio debe conmutar automáticamente su paleta hacia la "Oscuridad Terrosa" al detectar la preferencia nocturna en el SO.
-- **CA-2:** El ratio de contraste entre texto y fondo debe mantenerse en un mínimo de 4.5:1 para texto normal en ambos temas, evaluable mediante Lighthouse.
-- **CA-3:** Las variables de superficie, tarjetas e imágenes promocionales deben actualizarse dinámicamente sin romper la estructura de cajas.
+- **CA-1:** Deben definirse en `:root` los colores del GDD, espaciados y tipografía (escala 1.25).
+- **CA-2:** Debe aplicarse un reset global con `box-sizing: border-box`.
+- **CA-3:** Las fuentes (Lilita One, Inter) deben cargarse con `<link rel="preconnect">` sin usar `@import` en CSS.
+
+## US-13: Layout con Flexbox y Grid (mobile-first)
+**Como** visitante desde cualquier dispositivo,  
+**quiero** un diseño adaptable sin scroll horizontal,  
+**para** visualizar el contenido cómodamente en pantallas chicas y grandes.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** La barra de navegación debe usar Flexbox y las tarjetas de características CSS Grid (1 columna móvil, 2 tablet, 3 desktop).
+- **CA-2:** Las media queries deben implementarse con el enfoque mobile-first (`min-width`).
+- **CA-3:** No debe existir scroll horizontal en ninguna resolución entre 320px y 1280px.
+
+## US-14: Componentes, formularios y Fondo Gradiente (Reto 3)
+**Como** Bob (coleccionista),  
+**quiero** botones, tarjetas estilizadas y un Hero visualmente destacado,  
+**para** reconocer la identidad vibrante pop-folclórica del juego.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** Los botones deben tener estados interactivos (`:hover`, `:active`, `:focus-visible`) con transición suave.
+- **CA-2:** Las tarjetas deben tener bordes, sombras y un efecto de elevación al hacer hover.
+- **CA-3:** La sección Hero (o CTA final) debe implementar un fondo atractivo usando un gradiente CSS (`linear-gradient`) acorde a la paleta.
+
+## US-15: Tema Día/Noche en CSS y contraste
+**Como** Pato (usuario que navega de noche),  
+**quiero** que la página aplique modo oscuro respondiendo a la preferencia de mi sistema,  
+**para** leer cómodamente con colores bioluminiscentes representativos del juego.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** El CSS debe usar `@media (prefers-color-scheme: dark)` para alterar la paleta visual a colores oscuros.
+- **CA-2:** El contraste de color debe ser ≥ 4.5:1 para texto normal y ≥ 3:1 para texto grande en ambos temas.
+- **CA-3:** Las imágenes mostradas deben alternarse dinámicamente entre día y noche según el tema.
+
+## US-16: Animaciones sutiles y movimiento reducido
+**Como** visitante sensible al movimiento,  
+**quiero** animaciones decorativas que se desactiven si mi sistema operativo lo requiere,  
+**para** no marearme navegando el sitio.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** El hero debe aparecer con una animación de *fade-in* y las tarjetas deben elevarse al hover.
+- **CA-2:** Todas las transiciones y animaciones deben anularse dentro de un bloque `@media (prefers-reduced-motion: reduce)`.
+
+## US-17: Responsividad y rendimiento (gama baja)
+**Como** Pato (usuario con laptop de trabajo),  
+**quiero** que la landing cargue muy rápido y consuma pocos recursos,  
+**para** no gastar mis datos móviles ni congelar mi navegador.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** Las imágenes deben tener `width`, `height`, el formato óptimo (WebP/AVIF) y pesar menos de 250 KB en promedio.
+- **CA-2:** Las imágenes fuera del primer pliegue deben utilizar el atributo `loading="lazy"`.
+- **CA-3:** La página debe superar los 80 puntos en Lighthouse Performance (Móvil).
+
+## US-18: Migración a CSS propio (sin CDN)
+**Como** equipo de desarrollo,  
+**quiero** estructurar los estilos sin dependencias de frameworks externos como Tailwind,  
+**para** depender exclusivamente de nuestro sistema de tokens y reducir el peso del documento.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** Debe eliminarse la inyección del script CDN de Tailwind del documento HTML.
+- **CA-2:** La interfaz visual y *layout* deben mantenerse consistentes utilizando únicamente clases propias definidas en `styles.css`.
 
 ---
 
-## US-17: Animaciones CSS Sutiles y Accesibilidad de Movimiento Reducido
-**Como** usuario sensible al movimiento o navegante de la landing page,  
-**quiero** apreciar animaciones sutiles (fade-in, elevación de tarjetas, transiciones) que respeten mi configuración del sistema `prefers-reduced-motion`,  
-**para** disfrutar de una experiencia rica e interactiva sin sufrir mareos o distracciones.
+## E3 · Interactividad
+
+## US-19: JavaScript separado y sin atributos inline
+**Como** equipo de desarrollo,  
+**quiero** un script centralizado y desvinculado del HTML,  
+**para** mantener las buenas prácticas estructurales.
 
 ### Criterios de Aceptación (CA):
-- **CA-1:** El contenido del Hero debe cargar con un efecto de entrada gradual (*fade-in*) por opacidad y desplazamiento sutil.
-- **CA-2:** Las tarjetas deben elevarse ligeramente (`transform: translateY(-4px)`) y proyectar sombra al pasar el cursor (`:hover`).
-- **CA-3:** Todo estilo con animación debe deshabilitarse o simplificarse dentro del bloque `@media (prefers-reduced-motion: reduce)`.
+- **CA-1:** No debe existir ningún atributo `onclick` u `onsubmit` en el DOM.
+- **CA-2:** Toda la lógica debe concentrarse en `main.js`, cargado en el `<head>` usando el atributo `defer`.
+
+## US-20: Menú hamburguesa accesible
+**Como** Bob (navega en celular),  
+**quiero** un menú que oculte/muestre los enlaces mediante un botón,  
+**para** tener espacio de lectura y acceder rápido a otras secciones.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** El botón `.menu-toggle` debe alternar el estado del menú y sincronizar dinámicamente `aria-expanded` y `aria-label`.
+- **CA-2:** El menú debe cerrarse al seleccionar cualquier enlace ancla y debe soportar el cierre presionando la tecla Escape.
+
+## US-21: Validación de formularios sin alert()
+**Como** Lía (creadora de contenido),  
+**quiero** saber qué campos del formulario completé mal directamente en la interfaz,  
+**para** corregirlos rápidamente sin alertas intrusivas.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** Los errores de validación de JS deben inyectarse dinámicamente en etiquetas `<span>` con `role="alert"`.
+- **CA-2:** Los campos erróneos deben recibir `aria-invalid="true"` y una clase de estilo `.input-error`.
+- **CA-3:** Al escribir sobre un campo con error, su respectivo mensaje de alerta debe limpiarse automáticamente.
+
+## US-22: Scroll suave y navegación activa (scroll spy)
+**Como** visitante,  
+**quiero** que la página se deslice orgánicamente al pulsar el menú y me indique dónde estoy,  
+**para** no perder mi contexto de lectura.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** Los enlaces ancla deben activar un desplazamiento (*scroll*) suave mediante JS, respetando `prefers-reduced-motion`.
+- **CA-2:** Debe utilizarse el `IntersectionObserver` para marcar con la clase `.active` el enlace de la sección actualmente visible.
+
+## US-23: Pestañas del ciclo accesibles con teclado
+**Como** jugador casual,  
+**quiero** cambiar las fases del ciclo usando mi teclado,  
+**para** revisar las mecánicas sin depender del mouse.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** El componente de pestañas debe responder a interacciones con las flechas, *Inicio* y *Fin* modificando `aria-selected` y `tabindex`.
+- **CA-2:** Debe implementarse la mejora progresiva: si JS falla, los 3 paneles del contenido deben permanecer visibles secuencialmente.
+
+## US-24: Tema Día/Noche manual y persistente
+**Como** jugador casual,  
+**quiero** poder forzar el modo visual del sitio y que este se guarde,  
+**para** disfrutar de la temática oscura aunque mi sistema esté en modo claro.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** Los botones de cambio de tema deben conmutar correctamente el modo y actualizar sus atributos `aria-pressed`.
+- **CA-2:** La elección debe guardarse en `localStorage` (con `try/catch`) para prevenir pérdida de estado en la recarga, sin causar parpadeo visual al inicializar la página.
+
+## US-25: Voces de la comunidad con fetch (Reto 1)
+**Como** Bob (busca confianza),  
+**quiero** ver reseñas/testimonios renderizados dinámicamente,  
+**para** sentir validación antes de descargar.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** Se debe consumir asíncronamente la API `randomuser.me` mediante `fetch` y `try/catch` mostrando un indicador de carga (`role="status"`).
+- **CA-2:** Deben renderizarse 3 tarjetas con diseño coherente o mostrar un mensaje de error integrado al DOM si la petición falla.
+
+## US-26: Aparición al hacer scroll (Reto 3)
+**Como** visitante,  
+**quiero** que las secciones se revelen fluidamente a medida que desciendo,  
+**para** disfrutar de una experiencia inmersiva.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** Los elementos con `.animate-on-scroll` deben hacerse visibles al intersectar el *viewport* usando `IntersectionObserver` y animarse una única vez.
+- **CA-2:** Debe mostrarse el contenido sin animación si JS está apagado o si el usuario tiene activo `prefers-reduced-motion`.
 
 ---
 
-## US-18: Menú Hamburguesa Interactivo y Accesible para Móviles
-**Como** usuario navegando desde una pantalla móvil (<=375px),  
-**quiero** pulsar un botón de menú desplegable (hamburguesa) con feedback táctil inmediato,  
-**para** desplegar los enlaces de navegación sin que estorben en el contenido principal y cerrarlo automáticamente al hacer clic en un enlace o fuera del menú.
+## E4 · Funnel, Marketing y Telemetría
+
+## US-27: Diagrama del embudo de 4 pasos
+**Como** equipo de marketing,  
+**quiero** un diagrama documentado del embudo de conversión,  
+**para** tener claro cómo atraemos, retenemos y medimos a cada arquetipo de usuario.
 
 ### Criterios de Aceptación (CA):
-- **CA-1:** La barra de navegación debe incluir el botón `<button class="menu-toggle">` con los atributos `aria-expanded="false"`, `aria-label="Abrir menú de navegación"` y `aria-controls="nav-links-list"`.
-- **CA-2:** Al presionar el botón en móvil, el script debe alternar la clase `.nav-open` en el contenedor del menú y sincronizar dinámicamente `aria-expanded="true"` / `"false"`.
-- **CA-3:** Al hacer clic en cualquier enlace interno `<a>`, el menú móvil debe cerrarse automáticamente retornado la navegación a su estado retraído.
+- **CA-1:** El archivo `/docs/funnel.md` debe incluir un diagrama Mermaid detallando los flujos TOFU, MOFU y BOFU.
+- **CA-2:** El diagrama debe especificar el canal, el arquetipo (Pato, Lía, Bob) y la métrica de éxito de cada etapa.
 
----
-
-## US-19: Validación Avanzada de Formulario en el Cliente y WAI-ARIA Dinámico
-**Como** usuario que intenta registrarse a la newsletter o enviar un mensaje,  
-**quiero** recibir validación y feedback visual inmediato de mis errores en el navegador antes de enviar el formulario,  
-**para** corregir la información de manera clara, accesible y sin perder mis datos.
+## US-28: Canales de atracción (físico y digital)
+**Como** equipo de marketing,  
+**quiero** estructurar los canales de entrada para cada audiencia,  
+**para** ejecutar campañas con copies unificados (póster, redes).
 
 ### Criterios de Aceptación (CA):
-- **CA-1:** El script en el cliente debe validar mediante JavaScript que el nombre tenga >= 2 caracteres, el email cumpla con la sintaxis válida y el mensaje/comentario tenga >= 10 caracteres.
-- **CA-2:** En caso de invalidez, se deben inyectar dinámicamente en el DOM mensajes de error contenidos en etiquetas `<span>` configuradas con `role="alert"` y asociadas mediante `aria-invalid="true"` en los campos correspondientes.
-- **CA-3:** Si se reenvía el formulario con correcciones parciales, solo deben permanecer visibles en el DOM los mensajes de error de los campos aún inválidos, eliminando los solucionados.
+- **CA-1:** Deben definirse al menos un canal físico (ej. sobres de semillas/póster) y uno digital, incluyendo el copy publicitario y costo estimado basado en el Plan de Marketing.
 
----
-
-## US-20: Navegación Suave (Smooth Scrolling) e Integración con Menú Móvil
-**Como** usuario explorando el sitio por secciones,  
-**quiero** que al pulsar un enlace ancla del menú se produzca un desplazamiento suave hacia la sección solicitada,  
-**para** mantener la orientación espacial de la página sin saltos bruscos.
+## US-29: Etiquetado UTM y códigos QR
+**Como** equipo de telemetría,  
+**quiero** URLs etiquetadas y QR dinámicos,  
+**para** rastrear qué campaña genera más conversiones en la landing.
 
 ### Criterios de Aceptación (CA):
-- **CA-1:** Todos los enlaces ancla (`a[href^="#"]`) deben interceptarse mediante `addEventListener` en JS Vanilla para realizar scroll suave con `element.scrollIntoView({ behavior: 'smooth' })`.
-- **CA-2:** Al activarse la navegación por enlace ancla, la función debe gestionar simultáneamente el cierre del menú hamburguesa móvil si este se encontraba abierto.
-- **CA-3:** Toda la lógica JS debe incluirse en un archivo externo `main.js` enlazado con la directiva `defer` en la etiqueta `<script>`, manteniendo total separación entre estructura HTML y controladores.
+- **CA-1:** Debe definirse una tabla de parámetros `?src=` y generar QRs probados con enlaces cortos redirigibles para los canales físicos.
+- **CA-2:** Las URLs de los QRs deben dirigir sin errores al hosting público de la landing.
+
+## US-30: Material de marketing integrado en la landing
+**Como** visitante atraído por un TikTok o Póster,  
+**quiero** que la web coincida exactamente con lo que vi en publicidad,  
+**para** no generar fricción cognitiva.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** El eslogan principal, logotipo y arte gráfico usado en el marketing deben estar implementados en la cabecera y cuerpo de la página.
+- **CA-2:** La sección para creadores debe mencionar explícitamente recursos como el Kit de Prensa y la mecánica de semillas físicas.
+
+## US-31: Showcase multimedia (tráiler, gameplay, capturas)
+**Como** Pato (jugador casual),  
+**quiero** ver videos y pantallazos del juego,  
+**para** validar el apartado visual antes de descargar.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** La sección `#showcase` debe contener una galería interactiva accesible con al menos 4 imágenes rotuladas honestamente (conceptual o gameplay).
+- **CA-2:** Debe incluir un visor Lightbox con soporte para salida mediante la tecla Escape.
+- **CA-3:** Las piezas mostradas deben ser estrictamente los *assets* exportados y compilados en la US-03.
+
+## US-32: CTA principal, demo y registro anticipado
+**Como** Bob (equipo modesto),  
+**quiero** ver los requisitos de la demo,  
+**para** saber si corre en mi PC de gama baja.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** El CTA debe estar unificado y dirigir explícitamente a la sección de `#demo` informando que el formato está optimizado para PC de gama baja (mitigando la decisión D-02 y el riesgo R-03).
+- **CA-2:** Debe aclararse que el juego es *single-player offline* e incorporar un CTA secundario hacia un registro anticipado con hitos comunitarios.
+
+## US-33: Ficha técnica del equipo desarrollador
+**Como** inversor o docente,  
+**quiero** ver los créditos técnicos,  
+**para** conocer a los creadores y herramientas usadas.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** La sección `#equipo` debe detallar a los integrantes con foto/avatar (`alt`), rol y medios de contacto.
+- **CA-2:** La ficha debe exponer plataformas, género, motor y versión actual.
+
+## US-34: Cross-promotion con dos proyectos de compañeros
+**Como** compañero de clase,  
+**quiero** que mi juego sea promocionado en esta landing,  
+**para** generar tráfico cruzado entre nuestros ecosistemas.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** La sección `#aliados` debe contener 2 tarjetas funcionales con sinopsis, imagen y CTA externo.
+- **CA-2:** Los enlaces externos deben poseer atributos de rastreo `data-track` para medir la sinergia con los proyectos hermanos.
+
+## US-35: Cuestionario de validación para el Demo Day
+**Como** asistente al evento,  
+**quiero** un formulario muy corto,  
+**para** dar mi feedback sin perder tiempo en el stand.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** Debe existir un formulario externo (Tally, Forms) alcanzable vía URL/QR que no supere los 3 minutos de duración.
+- **CA-2:** Debe medir usabilidad (Likert), claridad en 10 segundos e incluir una escala NPS (obligatoria).
+
+## US-36: Definición de métricas (especificación para la API)
+**Como** desarrollador de la Parte 5,  
+**quiero** un contrato claro de los eventos a medir,  
+**para** programar el *backend* de telemetría sin ambigüedades.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** Debe existir `/docs/metricas.md` justificando las 4 familias de métricas: Atracción, Interacción, Sinergia y Feedback.
+- **CA-2:** Debe documentar explícitamente el contrato de los eventos a capturar (`session_id`, `src`, `timestamp`, `target`) garantizando que no procesarán datos personales sensibles.
+
+## US-37: Instrumentación de la landing para telemetría
+**Como** equipo de analítica,  
+**quiero** que el Front-End ya etiquete los clics y el origen,  
+**para** solo tener que conectar la API posteriormente.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** La landing debe leer y persistir el parámetro `?src` en `sessionStorage`.
+- **CA-2:** Los CTAs críticos (Demo, Tráiler, Aliados) deben tener el atributo `data-track` para ser despachados a una cola interna de la consola que use una variable `API_BASE` (preparado para la Parte 5).
+
+## US-38: Landing publicada en una URL pública
+**Como** visitante escaneando el sobre físico,  
+**quiero** abrir el sitio en mi celular usando datos móviles,  
+**para** poder acceder a la demo desde el evento.
+
+### Criterios de Aceptación (CA):
+- **CA-1:** El código final debe publicarse en un servicio de *hosting* estático gratuito con protocolo HTTPS.
+- **CA-2:** La consola no debe arrojar errores 404 de *assets* y el sitio debe ser operativo bajo redes del campus.

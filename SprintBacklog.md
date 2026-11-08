@@ -1,93 +1,189 @@
 # Sprint Backlog: YOLCATL
 ## Desglose en Tareas
-### US-01: Hero Section del Videojuego
-* **Tarea 1.1:** Maquetar la estructura contenedora principal con la etiqueta semántica `<section id="hero">`, incorporando el encabezado jerárquico único `<h1>` para el título principal del juego y un párrafo `<p>` para el tagline/pitch de impacto promocional (15 min).
-* **Tarea 1.2:** Crear el enlace de llamada a la acción (CTA) primario con `<a href="Yolcatl-Demo.apk" download>` agregando la etiqueta accesible `aria-label="Descargar demo ejecutable APK para Android"` (10 min).
-* **Tarea 1.3:** Configurar el enlace secundario "Ver Tráiler" mediante la etiqueta `<a>` asignando los atributos de seguridad y contexto `target="_blank"` y `rel="noopener noreferrer"`, incluyendo un `<span class="sr-only">` para indicar a lectores de pantalla que el contenido se abre en una ventana nueva (10 min).
-* **Tarea 1.4:** Maquetar el contenedor de imagen responsivo con las etiquetas semánticas `<figure>` y `<picture>`, definiendo etiquetas `<source>` de reserva y la etiqueta `<img>` con el atributo `alt` detailed para la descripción accesible del arte principal (15 min).
+
+### E0 · Metodología y Gestión
+
+#### US-01: Backlog, CA y Definition of Done
+* **Tarea 1.1:** Redactar el documento final del backlog asegurando el formato de historias de usuario y al menos 2 Criterios de Aceptación por historia (20 min).
+* **Tarea 1.2:** Discutir con el equipo y documentar la resolución de las decisiones abiertas (D-01 a D-10), definiendo explícitamente la plataforma objetivo y modelo de distribución (30 min).
+* **Tarea 1.3:** Redactar la *Definition of Done* (DoD) global del proyecto y estandarizar el formato para el registro de cambios de alcance (15 min).
+
+#### US-02: Tablero Trello y evidencias
+* **Tarea 2.1:** Configurar el tablero de Trello creando las listas requeridas: Product Backlog, Sprint Backlog, En progreso, En revisión y Hecho (15 min).
+* **Tarea 2.2:** Volcar todas las US al tablero como tarjetas, incluyendo los CA como *checklists* interactivos y asignando responsables mediante etiquetas (45 min).
+* **Tarea 2.3:** Configurar ShareX (o herramienta similar) y capturar las evidencias iniciales del tablero para el reporte del Sprint (10 min).
+
+#### US-03: Context Brain y Creación de Assets Faltantes
+* **Tarea 3.1:** Crear la estructura de carpetas `/docs/context/` y unificar los documentos de lore, paleta y glosario en archivos Markdown referenciados (20 min).
+* **Tarea 3.2:** Recopilar, editar y empaquetar los recursos gráficos finales, generando el archivo descargable `KitPrensa.zip` (40 min).
+* **Tarea 3.3:** Capturar o generar las imágenes conceptuales faltantes y el enlace del clip de gameplay para uso posterior en la landing (45 min).
 
 ---
 
-### US-06: Formulario de Comunidad y Registro a Newsletter
-* **Tarea 6.1:** Crear la estructura contenedora `<section id="comunidad">` y maquetar el formulario semántico `<form id="newsletter-form">` asociando explícitamente un elemento `<label for="email-input">` para identificar la entrada (15 min).
-* **Tarea 6.2:** Definir el campo de entrada `<input id="email-input" type="email">` configurando validación HTML5 nativa con los atributos `required`, `autocomplete="email"` y `aria-required="true"` (10 min).
-* **Tarea 6.3:** Maquetar el botón de envío del formulario `<button type="submit">` con texto descriptivo claro e integrar la región de anuncios accesibles `<div id="form-feedback" aria-live="polite">` para comunicar el resultado a tecnologías asistivas sin recargar la página (15 min).
-* **Tarea 6.4:** Agrupar los enlaces a canales de comunidad dentro de un elemento de navegación `<nav aria-label="Canales de la comunidad">` utilizando una lista desordenada `<ul>` y elementos `<li>` con sus respectivos hipervínculos `<a>` accesibles (15 min).
+### E1 · Estructura Semántica
+
+#### US-04: Hero con nombre, género y promesa
+* **Tarea 4.1:** Maquetar la estructura contenedora principal con la etiqueta semántica `<section id="hero" aria-labelledby="hero-title">` e incorporar el encabezado jerárquico único `<h1>` (15 min).
+* **Tarea 4.2:** Redactar y maquetar el párrafo `<p>` con el pitch de impacto promocional (máximo 40 palabras) validando que no quede texto de relleno (15 min).
+* **Tarea 4.3:** Crear los enlaces de llamada a la acción (CTA) primario y secundario apuntando a `#demo` y `#showcase` respectivamente, configurando sus clases base (10 min).
+
+#### US-05: Navegación semántica y por teclado
+* **Tarea 5.1:** Crear la etiqueta `<header>` e incorporar el menú de navegación mediante `<nav aria-label="Navegación principal">` con la lista de enlaces internos (15 min).
+* **Tarea 5.2:** Implementar un enlace oculto visualmente (`.sr-only`) al inicio del `<body>` con el texto "Saltar al contenido" apuntando al `<main id="contenido">` (10 min).
+* **Tarea 5.3:** Navegar la página exclusivamente con la tecla *Tab* para auditar que el foco siga un orden secuencial lógico en todo el DOM (15 min).
+
+#### US-06: Historia y propuesta de valor
+* **Tarea 6.1:** Estructurar la sección `<section id="hacienda">` anidando 3 elementos `<article>` para la Visión, la Hacienda y los Guardianes (15 min).
+* **Tarea 6.2:** Maquetar la lista de los 4 pilares de valor del juego, revisando la ortografía oficial ("Pajianí") según el Glosario (15 min).
+* **Tarea 6.3:** Implementar las imágenes de soporte usando las etiquetas semánticas `<figure>` y `<figcaption>`, asegurando el texto alternativo `alt` en cada una (20 min).
+
+#### US-07: Características del juego
+* **Tarea 7.1:** Construir las secciones contenedoras `#ciclo`, `#alquimia` y `#metamorfosis` respetando estrictamente el flujo de encabezados `<h2>` a `<h3>` (20 min).
+* **Tarea 7.2:** Redactar la descripción técnica de la mecánica del molcajete, enfatizando la interacción táctil (arrastre/rotación) exigida por el GDD (15 min).
+* **Tarea 7.3:** Maquetar el contenedor del bestiario listando semánticamente las 6 formas nahuales con sus oficios diurnos y habilidades defensivas (30 min).
+
+#### US-08: Formulario de contacto y newsletter
+* **Tarea 8.1:** Crear la estructura `<section id="contacto">` y maquetar el `<form>` con campos explícitamente asociados a través de `<label for="...">` (15 min).
+* **Tarea 8.2:** Integrar validación HTML5 (`required`, `type="email"`, `minlength="10"`) y el atributo `autocomplete` correspondiente a cada input (15 min).
+* **Tarea 8.3:** Incorporar la región de notificaciones accesibles mediante un `<div>` vacío con `role="status"` y `aria-live="polite"` (10 min).
+
+#### US-09: Footer y enlaces de comunidad
+* **Tarea 9.1:** Maquetar el pie de página usando `<footer>` estructurado en columnas semánticas (15 min).
+* **Tarea 9.2:** Configurar todos los hipervínculos externos con `target="_blank"` y `rel="noopener noreferrer"`, reemplazando enlaces vacíos por URLs definitivas o de *placeholder* válidos (15 min).
+* **Tarea 9.3:** Enlazar correctamente el botón de descarga del kit al asset `KitPrensa.zip` generado previamente en la US-03 (10 min).
+
+#### US-10: HTML válido y accesibilidad (Retos 1 y 2)
+* **Tarea 10.1:** Insertar el atributo `lang="es"` en la etiqueta `<html>` y verificar que todas las imágenes decorativas posean `alt=""` (10 min).
+* **Tarea 10.2:** Pasar el código completo por el W3C Markup Validator y corregir cualquier error/warning estructural reportado (20 min).
+* **Tarea 10.3:** Ejecutar un reporte de Lighthouse Accessibility en Chrome DevTools y aplicar los ajustes sugeridos hasta alcanzar >90 puntos (20 min).
+
+#### US-11: Prueba con lector de pantalla (Reto 3)
+* **Tarea 11.1:** Encender Narrador (Windows) o VoiceOver (Mac) y navegar el flujo completo de la página documentando la experiencia auditiva (30 min).
+* **Tarea 11.2:** Redactar el documento `accesibilidad-notas.md` con los hallazgos y ajustar el HTML (ej. añadiendo `aria-labels` faltantes) para mitigar los bloqueos detectados (25 min).
 
 ---
 
-### US-09: Roadmap de Desarrollo
-* **Tarea 9.1:** Maquetar la estructura contenedora principal utilizando la etiqueta semántica `<section id="roadmap">` y una lista ordenada `<ol>` para representar de forma secuencial y accesible los hitos del proyecto (15 min).
-* **Tarea 9.2:** Definir los estilos CSS base centrados en dispositivos móviles (Mobile-First), estructurando los elementos de la línea de tiempo en un diseño vertical fluido mediante Flexbox (20 min).
-* **Tarea 9.3:** Implementar Media Queries en CSS para reorganizar el diseño de la línea de tiempo, transformándolo a una disposición horizontal o en formato de zigzag cuando se visualice en pantallas de escritorio (25 min).
-* **Tarea 9.4:** Crear las clases CSS específicas para los "hitos completados", aplicando colores sólidos y opacos, e insertando un icono SVG de verificación (check) para destacarlos visualmente (20 min).
-* **Tarea 9.5:** Codificar las clases CSS para los "hitos futuros", ajustando la propiedad `opacity` para aplicar un efecto translúcido y configurando bordes con `border-style: dashed` para crear las líneas conectoras punteadas (15 min).
-* **Tarea 9.6:** Escribir la lógica en JavaScript instanciando la Intersection Observer API para rastrear los elementos del roadmap y detectar el momento exacto en el que cruzan el umbral del viewport durante el scroll (30 min).
-* **Tarea 9.7:** Configurar la animación de entrada (fade-in) mediante transiciones CSS y enlazarla con el script del Observer para que la clase de visibilidad se active dinámicamente, logrando el impacto visual requerido (20 min).
+### E2 · Diseño y Responsividad
+
+#### US-12: Sistema de diseño (tokens, reset, tipografía)
+* **Tarea 12.1:** Escribir el CSS Reset en `styles.css` aplicando `box-sizing: border-box`, `margin: 0` y `padding: 0` globalmente (10 min).
+* **Tarea 12.2:** Declarar las Custom Properties (variables CSS) en `:root` para los colores primarios (Papel Pink, Marigold Orange, Talavera Blue), espaciados y escala tipográfica (20 min).
+* **Tarea 12.3:** Importar tipografías desde Google Fonts utilizando `<link rel="preconnect">` en el HTML y aplicarlas al selector `body` (15 min).
+
+#### US-13: Layout con Flexbox y Grid (mobile-first)
+* **Tarea 13.1:** Implementar Flexbox en el `.navbar` para alinear elementos (columna en móvil, fila en desktop) mediante el enfoque `min-width` (25 min).
+* **Tarea 13.2:** Configurar CSS Grid en las tarjetas de Bestiario (`grid-template-columns: 1fr` en móvil, escalando a 2 y 3 columnas con media queries) (25 min).
+* **Tarea 13.3:** Revisar en DevTools el comportamiento general entre 320px y 1280px para garantizar la ausencia total de scroll horizontal (15 min).
+
+#### US-14: Componentes, formularios y Fondo Gradiente (Reto 3)
+* **Tarea 14.1:** Estilizar botones y tarjetas aplicando estados de interacción como `:hover`, `:focus-visible` y efectos de sombra/elevación (20 min).
+* **Tarea 14.2:** Implementar un gradiente CSS (`linear-gradient`) utilizando la paleta de marca y aplicarlo como fondo fluido en la sección `#hero` (20 min).
+* **Tarea 14.3:** Formatear visualmente los inputs y textareas del formulario para que mantengan un alto contraste y claridad en su foco (15 min).
+
+#### US-15: Tema Día/Noche en CSS y contraste
+* **Tarea 15.1:** Escribir el bloque `@media (prefers-color-scheme: dark)` reasignando las variables de color hacia la paleta oscura (Oscuridad Terrosa) (25 min).
+* **Tarea 15.2:** Auditar con una herramienta de contraste que los textos mantengan ratios ≥ 4.5:1 (normal) y ≥ 3:1 (grande) en ambos modos (20 min).
+* **Tarea 15.3:** Aplicar clases o atributos combinados para permutar la visualización de la imagen del Hero entre día y noche (20 min).
+
+#### US-16: Animaciones sutiles y movimiento reducido
+* **Tarea 16.1:** Crear `@keyframes fadeIn` y asignarlo a las clases de inicialización del documento para un efecto de entrada gradual (15 min).
+* **Tarea 16.2:** Añadir la media query `@media (prefers-reduced-motion: reduce)` suprimiendo o acelerando a 0s las transiciones y animaciones clave (15 min).
+
+#### US-17: Responsividad y rendimiento (gama baja)
+* **Tarea 17.1:** Convertir los *assets* estáticos a formato WebP o AVIF y asignar atributos fijos `width` y `height` a las etiquetas `<img>` (25 min).
+* **Tarea 17.2:** Agregar el atributo `loading="lazy"` a todas las imágenes y recursos que se encuentren por debajo del *fold* inicial (10 min).
+* **Tarea 17.3:** Correr un test de Lighthouse Performance simulando un dispositivo móvil para corroborar que la métrica supere los 80 puntos (15 min).
+
+#### US-18: Migración a CSS propio (sin CDN)
+* **Tarea 18.1:** Eliminar la inyección de la etiqueta `<script>` del CDN de Tailwind del `<head>` del documento HTML (5 min).
+* **Tarea 18.2:** Replicar cualquier clase utilitaria faltante directamente en el archivo `styles.css` propio para asegurar que no se rompa la vista (30 min).
 
 ---
 
-### US-10: Carrusel Interactivo de Capturas de Pantalla
-* **Tarea 10.1:** Maquetar la estructura HTML de la galería de capturas, utilizando las etiquetas `<picture>` y `<source>` para definir las imágenes en formato WebP, y añadiendo el atributo `loading="lazy"` en las etiquetas `<img>` para evitar penalizaciones en el LCP (25 min).
-* **Tarea 10.2:** Configurar el CSS del contenedor principal del carrusel, implementando propiedades como `overflow-x: auto` y `scroll-snap-type: x mandatory` para habilitar de forma nativa la navegación mediante gestos de deslizamiento (*swipe*) en dispositivos móviles (20 min).
-* **Tarea 10.3:** Maquetar y posicionar los controles de interfaz (botones de flecha anterior y siguiente) exclusivos para la vista de escritorio, escribiendo el script en JavaScript que gestione el desplazamiento horizontal del contenedor al hacer clic (30 min).
-* **Tarea 10.4:** Construir la estructura semántica y los estilos CSS para el componente Modal (Lightbox), asegurando que se superponga a pantalla completa e incluya un botón claramente visible y accesible para cerrarlo (25 min).
-* **Tarea 10.5:** Escribir la lógica en JavaScript para capturar el evento click sobre las imágenes del carrusel, encargándose de inyectar la ruta de la imagen seleccionada dentro del Modal y cambiar su estado CSS para mostrarlo en pantalla (20 min).
-* **Tarea 10.6:** Implementar un detector de eventos (`addEventListener`) a nivel global en el documento mediante JavaScript para capturar la interacción del teclado, evaluando específicamente la tecla *Escape* para disparar la función de cierre del componente Modal (15 min).
+### E3 · Interactividad
+
+#### US-19: JavaScript separado y sin atributos inline
+* **Tarea 19.1:** Limpiar el HTML eliminando atributos antiguos como `onclick`, `onmouseover` u `onsubmit` (15 min).
+* **Tarea 19.2:** Vincular el archivo `main.js` en el HTML usando el atributo `defer` y trasladar toda la lógica al manejador de eventos `DOMContentLoaded` (15 min).
+
+#### US-20: Menú hamburguesa accesible
+* **Tarea 20.1:** Insertar el `<button class="menu-toggle">` con `aria-expanded="false"` y maquetarlo en CSS exclusivo para móvil (15 min).
+* **Tarea 20.2:** Programar el *listener* en JS para alternar la visibilidad del menú y sincronizar el atributo `aria-expanded` (20 min).
+* **Tarea 20.3:** Programar el cierre automático del menú al presionar la tecla Escape o al hacer clic en un enlace de navegación interno (15 min).
+
+#### US-21: Validación de formularios sin alert()
+* **Tarea 21.1:** Interceptar el evento `submit` del formulario mediante `e.preventDefault()` en JavaScript (10 min).
+* **Tarea 21.2:** Escribir la lógica de validación de campos e inyectar dinámicamente `<span role="alert">` con mensajes de error si fallan las condiciones (25 min).
+* **Tarea 21.3:** Cambiar `aria-invalid="true"` dinámicamente y programar listeners `input` para limpiar los errores visuales en cuanto el usuario comience a corregir (20 min).
+
+#### US-22: Scroll suave y navegación activa (scroll spy)
+* **Tarea 22.1:** Implementar JS para capturar clics en `a[href^="#"]` y ejecutar `scrollIntoView({ behavior: 'smooth' })`, respetando la preferencia de movimiento (20 min).
+* **Tarea 22.2:** Instanciar `IntersectionObserver` mapeando las secciones para agregar/remover dinámicamente la clase `.active` en el menú de navegación al hacer scroll (30 min).
+
+#### US-23: Pestañas del ciclo accesibles con teclado
+* **Tarea 23.1:** Construir la lógica JS del `role="tablist"` escuchando eventos de `keydown` (Flechas, Inicio, Fin) para trasladar el foco y el atributo `aria-selected` (35 min).
+* **Tarea 23.2:** Asegurar en CSS que, si JS no carga, el diseño caiga en gracia (*fallback*) mostrando todos los paneles de forma secuencial (15 min).
+
+#### US-24: Tema Día/Noche manual y persistente
+* **Tarea 24.1:** Conectar los botones de modo claro/oscuro en JS para forzar la inyección de un atributo `data-theme` en la etiqueta `<html>` (20 min).
+* **Tarea 24.2:** Implementar `localStorage.setItem` y `getItem` con bloques `try/catch` para recuperar la elección del usuario al recargar la página (20 min).
+
+#### US-25: Voces de la comunidad con fetch (Reto 1)
+* **Tarea 25.1:** Programar el llamado asíncrono con `fetch` a `randomuser.me`, manejando estados de carga (*loading spinner*) y captura de errores (30 min).
+* **Tarea 25.2:** Generar dinámicamente en JS el marcado de 3 tarjetas de reseñas con los datos obtenidos e insertarlos en el DOM (30 min).
+
+#### US-26: Aparición al hacer scroll (Reto 3)
+* **Tarea 26.1:** Configurar un `IntersectionObserver` que detecte elementos con `.animate-on-scroll` y les añada una clase `.visible` (25 min).
+* **Tarea 26.2:** Escribir el CSS condicional para que la transición solo ocurra si el usuario no tiene activado `prefers-reduced-motion` (15 min).
 
 ---
 
-### US-13: Sistema de Diseño Base, Variables CSS & Reset Global
-* **Tarea 13.1:** Escribir las reglas del CSS Reset global incorporando el selector universal `*, *::before, *::after` fijando la propiedad `box-sizing: border-box`, `margin: 0` y `padding: 0` para eliminar inconsistencias entre navegadores (15 min).
-* **Tarea 13.2:** Declarar el bloque de variables en `:root` definiendo la paleta cromática oficial de YOLCATL (Papel Pink `#E4007C`, Marigold Orange `#FF7F00`, Talavera Blue `#003893`), escalas de fuentes, sombras y espaciados (20 min).
-* **Tarea 13.3:** Importar e implementar una tipografía legible de Google Fonts (*Outfit* o *Plus Jakarta Sans*) en la cabecera e integrarla al elemento `body` garantizando legibilidad óptima en 320px (15 min).
+### E4 · Funnel, Marketing y Telemetría
 
----
+#### US-27: Diagrama del embudo de 4 pasos
+* **Tarea 27.1:** Redactar el archivo `/docs/funnel.md` e insertar un diagrama Mermaid categorizando los flujos TOFU, MOFU y BOFU (25 min).
+* **Tarea 27.2:** Detallar en el documento qué métrica de éxito (ej. CTR, conversiones) aplica para Pato, Lía y Bob (20 min).
 
-### US-14: Layouts Responsivos Mobile-First (Flexbox & Grid)
-* **Tarea 14.1:** Estilizar el menú de navegación con Flexbox en arquitectura Mobile-First (disposición en columna para móviles <768px y cambio en media query a fila con espacio distribuido en desktop >768px) (20 min).
-* **Tarea 14.2:** Configurar la sección del Bestiario y características principales con CSS Grid utilizando `grid-template-columns: 1fr` en móvil, ampliando progresivamente a 2 y 4 columnas mediante `min-width` media queries (25 min).
-* **Tarea 14.3:** Aplicar un layout flexible al contenedor del Hero para centrar vertical y horizontalmente su contenido, verificando que no exista scroll horizontal al escalar el viewport entre 320px y 1280px (20 min).
+#### US-28: Canales de atracción (físico y digital)
+* **Tarea 28.1:** Especificar en el documento de funnel el copy exacto y arte conceptual para la campaña de TikTok (Digital) (15 min).
+* **Tarea 28.2:** Redactar el copy e idea de distribución para el sobre de semillas folclórico (Físico) como canal de guerrilla (15 min).
 
----
+#### US-29: Etiquetado UTM y códigos QR
+* **Tarea 29.1:** Definir la tabla de valores aceptados para el parámetro `?src=` (ej. `src=poster_campus`, `src=tiktok_demo`) (10 min).
+* **Tarea 29.2:** Utilizar un generador para crear los códigos QR funcionales apuntando a la URL pública e insertarlos en los *assets* de póster (15 min).
 
-### US-15: Estilización Temática Avanzada de Secciones
-* **Tarea 15.1:** Diseñar el fondo del Hero empleando un gradiente de color personalizado de marca (`#003893` a `#E4007C`) generado con CSS y aplicar estados `:hover` e hipervínculos a los botones CTA (20 min).
-* **Tarea 15.2:** Aplicar sombras (`box-shadow`), bordes temáticos (`border-left`) y rellenos a las tarjetas de contenido del Bestiario e historia (20 min).
-* **Tarea 15.3:** Estilizar los campos de entrada e insumos del formulario de la comunidad definiendo estilos claros para el estado `:focus-visible` con contorno de alto contraste (15 min).
-* **Tarea 15.4:** Maquetar y estilizar la sección del Footer con fondo oscuro de marca y organización en fila/columnas flexibles utilizando Flexbox (20 min).
+#### US-30: Material de marketing integrado en la landing
+* **Tarea 30.1:** Revisar y alinear la cabecera (eslogan y tipografía principal) para que mantenga correspondencia 1:1 con el arte de las redes (15 min).
+* **Tarea 30.2:** Redactar un micro-copy en la sección `#comunidad` que invite explícitamente a reclamar las "semillas físicas" (10 min).
 
----
+#### US-31: Showcase multimedia (tráiler, gameplay, capturas)
+* **Tarea 31.1:** Maquetar la galería interactiva en `#showcase` inyectando los thumbnails extraídos del `KitPrensa` (20 min).
+* **Tarea 31.2:** Implementar y vincular el componente Lightbox (de la US-10) para reproducir/visualizar a detalle cada captura/video (25 min).
 
-### US-16: Modo Oscuro Automático y Contraste WCAG
-* **Tarea 16.1:** Configurar la regla `@media (prefers-color-scheme: dark)` redefiniendo las variables de fondo (`--bg-main`), superficie (`--bg-card`) y texto (`--text-primary`) hacia tonos de Oscuridad Terrosa nocturna (20 min).
-* **Tarea 16.2:** Realizar pruebas de auditoría con Lighthouse en ambos modos (Claro/Oscuro) verificando que el ratio de contraste sea igual o superior a 4.5:1 en todos los textos legibles (20 min).
+#### US-32: CTA principal, demo y registro anticipado
+* **Tarea 32.1:** Redactar el bloque de requerimientos mínimos en la sección `#demo` (confirmando optimización para PC gama baja) (15 min).
+* **Tarea 32.2:** Insertar un CTA secundario semántico que lleve a la campaña de comunidad/hitos de registro anticipado (10 min).
 
----
+#### US-33: Ficha técnica del equipo desarrollador
+* **Tarea 33.1:** Crear las tarjetas de desarrollador en `#equipo`, incluyendo fotografía/avatar optimizado, rol técnico y enlace a portafolio o LinkedIn (20 min).
+* **Tarea 33.2:** Añadir la placa informativa resumiendo: Motor (ej. Godot/Unity), Plataforma (PC), Género y Versión (10 min).
 
-### US-17: Animaciones CSS y Accesibilidad de Movimiento
-* **Tarea 17.1:** Crear la animación `@keyframes fadeIn` y aplicarla al contenido de la sección Hero al cargar la página (15 min).
-* **Tarea 17.2:** Agregar transiciones suaves (`transition: transform 0.3s, box-shadow 0.3s`) y efecto de elevación al pasar el cursor sobre las tarjetas de la landing page (15 min).
-* **Tarea 17.3:** Implementar el bloque `@media (prefers-reduced-motion: reduce)` para anular o simplificar las animaciones y transiciones a usuarios que lo tengan configurado en su sistema operativo (15 min).
+#### US-34: Cross-promotion con dos proyectos de compañeros
+* **Tarea 34.1:** Maquetar la sección `#aliados` insertando el arte y sinopsis de dos proyectos hermanos aprobados previamente (20 min).
+* **Tarea 34.2:** Incorporar el atributo custom `data-track="cross-promo-ID"` en los hipervínculos externos para su futuro rastreo (10 min).
 
----
+#### US-35: Cuestionario de validación para el Demo Day
+* **Tarea 35.1:** Configurar un formulario en Tally/Google Forms con escala Likert (usabilidad) y NPS, garantizando que el llenado tome < 3 mins (25 min).
+* **Tarea 35.2:** Generar el QR/Link corto y enlazarlo visiblemente al final de la landing page o en la interfaz de la demo (10 min).
 
-### US-18: Menú Hamburguesa Interactivo y Accesible
-* **Tarea 18.1:** Insertar el botón semántico `<button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-label="Abrir menú de navegación" aria-controls="nav-links">` dentro del `<nav>` del archivo `index.html` (10 min).
-* **Tarea 18.2:** Escribir el listener `addEventListener('click')` en `main.js` para alternar la clase CSS `.nav-open` en la lista de enlaces e intercambiar los valores booleanos de `aria-expanded` (15 min).
-* **Tarea 18.3:** Agregar listeners a cada enlace del menú (`.nav-links a`) para remover la clase `.nav-open` y restablecer `aria-expanded="false"` al seleccionar una sección (15 min).
+#### US-36: Definición de métricas (especificación API)
+* **Tarea 36.1:** Crear `/docs/metricas.md` estructurando las 4 familias analíticas (Atracción, Interacción, Sinergia y Feedback) (25 min).
+* **Tarea 36.2:** Redactar el contrato JSON esperado para la Parte 5, especificando campos como `session_id`, `src`, `timestamp` y `target` asegurando anonimato (20 min).
 
----
+#### US-37: Instrumentación de la landing para telemetría
+* **Tarea 37.1:** Escribir el script para leer `new URLSearchParams(window.location.search).get('src')` y guardarlo de inmediato en `sessionStorage` (15 min).
+* **Tarea 37.2:** Agregar *listeners* temporales en los botones con `data-track` que emitan un `console.log` estructurado emulando el *payload* futuro a `API_BASE` (25 min).
 
-### US-19: Validación de Formulario en Cliente y Feedback ARIA
-* **Tarea 19.1:** Capturar el evento `submit` en el formulario `#newsletter-form` utilizando `e.preventDefault()` en `main.js` (10 min).
-* **Tarea 19.2:** Escribir la función de validación que evalúe la longitud del nombre (>=2 caracteres), formato de correo regex y longitud de comentario (>=10 caracteres) (20 min).
-* **Tarea 19.3:** Crear dinámicamente mediante `document.createElement('span')` los elementos de mensaje de error asignándoles `role="alert"` y la clase `.error-msg` para inyectarlos debajo del campo correspondiente (20 min).
-* **Tarea 19.4:** Marcar o desmarcar los inputs con `aria-invalid="true"` / `"false"` y remover los mensajes de error de campos previamente corregidos al reenviar (15 min).
-
----
-
-### US-20: Smooth Scrolling Integrado y Carga Defer
-* **Tarea 20.1:** Enlazar el script externo `<script src="main.js" defer></script>` justo antes del cierre del `</body>` en `index.html` (5 min).
-* **Tarea 20.2:** Seleccionar los enlaces de salto ancla `document.querySelectorAll('a[href^="#"]')` y programar la función de desplazamiento con `scrollIntoView({ behavior: 'smooth', block: 'start' })` (15 min).
-* **Tarea 20.3:** Probar de manera integral que al pulsar un enlace ancla en pantallas de 375px de ancho se ejecute el scroll suave y la cortina del menú hamburguesa se retire en sincronía (15 min).
+#### US-38: Landing publicada en una URL pública
+* **Tarea 38.1:** Desplegar el código fuente del proyecto en GitHub Pages, Vercel o Netlify activando el certificado HTTPS automático (20 min).
+* **Tarea 38.2:** Navegar la URL pública desde un dispositivo móvil desconectado del WiFi local para verificar la resolución correcta de *assets* sin errores 404 (15 min).

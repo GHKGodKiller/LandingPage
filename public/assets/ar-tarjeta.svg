@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800" role="img" aria-label="Vista AR">
+<rect width="400" height="800" fill="#003893"/>
+<g fill="none" stroke="#FFFFFF" stroke-width="6" opacity=".25"><circle cx="80.0" cy="200.0" r="48.0"/><circle cx="320.0" cy="600.0" r="72.0"/><path d="M0 640.0 Q 200.0 440.00000000000006 400 680.0"/></g>
+<text x="50%" y="48%" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="33" fill="#FFFFFF">Vista AR</text>
+<text x="50%" y="58%" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" fill="#FFFFFF" opacity=".8">Tarjeta coleccionable + cosmético</text></svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Molcajete">
+<rect width="800" height="600" fill="#FFE9C7"/>
+<g fill="none" stroke="#7A3E00" stroke-width="6" opacity=".25"><circle cx="160.0" cy="150.0" r="72.0"/><circle cx="640.0" cy="450.0" r="108.0"/><path d="M0 480.0 Q 400.0 330.0 800 510.0"/></g>
+<text x="50%" y="48%" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="50" fill="#7A3E00">Molcajete</text>
+<text x="50%" y="58%" text-anchor="middle" font-family="Arial,sans-serif" font-size="30" fill="#7A3E00" opacity=".8">Captura conceptual pendiente</text></svg>
