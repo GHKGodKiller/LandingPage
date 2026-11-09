@@ -1,15 +1,10 @@
-/* =========================================================
-   YOLCATL · main.js  (JavaScript vanilla, cargado con defer)
-   1 Config y telemetría · 2 Tema · 3 Menú · 4 Scroll · 5 Pestañas
-   · 6 Galería · 7 Formularios · 8 Registro · 9 Voces de ejemplo
-   ========================================================= */
+
 document.addEventListener('DOMContentLoaded', () => {
     'use strict';
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    /* ---------- 1. CONFIG Y TELEMETRÍA (sin cookies ni datos personales) ---------- */
-    // Misma origen cuando la página la sirve server.js. Se puede fijar con <meta name="api-base" content="https://...">.
+
     const metaBase = document.querySelector('meta[name="api-base"]');
     const API_BASE = metaBase ? metaBase.content.replace(/\/$/, '') : (location.protocol === 'file:' ? 'http://localhost:3000' : '');
 
@@ -41,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (target && target.getAttribute('aria-disabled') !== 'true') trackEvent('clic', { target: target.dataset.track });
     });
 
-    /* ---------- 2. TEMA DÍA / NOCHE ---------- */
     const root = document.documentElement;
     const btnDia = document.getElementById('btn-dia');
     const btnNoche = document.getElementById('btn-noche');
@@ -74,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!saved) applyTheme(e.matches ? 'dark' : 'light', true);
     });
 
-    /* ---------- 3. MENÚ HAMBURGUESA ---------- */
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.getElementById('nav-menu');
 
@@ -93,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
 
-    /* ---------- 4. SCROLL SUAVE, SCROLL SPY Y APARICIÓN ---------- */
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener('click', (e) => {
             const id = anchor.getAttribute('href');
@@ -137,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.animate-on-scroll').forEach((el) => el.classList.add('visible'));
     }
 
-    /* ---------- 5. PESTAÑAS DEL CICLO (flechas, Home y End) ---------- */
     const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
     function selectTab(tab, focus) {
         tabs.forEach((t) => {
@@ -161,7 +152,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    /* ---------- 7. FORMULARIOS: validación sin alert() ---------- */
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbCaption = document.getElementById('lightbox-caption');
+    const galleryLinks = Array.from(document.querySelectorAll('#gallery a'));
+    let lbIndex = 0;
+
+    function showSlide(index) {
+        lbIndex = (index + galleryLinks.length) % galleryLinks.length;
+        const link = galleryLinks[lbIndex];
+        const thumb = link.querySelector('img');
+        lbImg.src = link.getAttribute('href');
+        lbImg.alt = thumb.alt.replace(/\. Ampliar imagen$/, '');
+        lbCaption.textContent = link.dataset.caption;
+    }
+    galleryLinks.forEach((link, index) => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSlide(index);
+            lightbox.showModal();
+        });
+    });
+    document.getElementById('lb-prev').addEventListener('click', () => showSlide(lbIndex - 1));
+    document.getElementById('lb-next').addEventListener('click', () => showSlide(lbIndex + 1));
+    document.getElementById('lb-close').addEventListener('click', () => lightbox.close());
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.close(); });
+    lightbox.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') showSlide(lbIndex - 1);
+        if (e.key === 'ArrowRight') showSlide(lbIndex + 1);
+    });
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     function clearError(input) {
@@ -200,17 +220,15 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify(payload)
         });
         let data = {};
-        try { data = await response.json(); } catch (e) { /* respuesta sin JSON */ }
+        try { data = await response.json(); } catch (e) {  }
         return { status: response.status, data };
     }
     const offlineMessage = 'No pudimos conectar con el servidor. Inténtalo de nuevo en unos minutos.';
 
-    // Limpia el error de un campo al escribir
     document.querySelectorAll('.input').forEach((input) => {
         input.addEventListener('input', () => { if (input.getAttribute('aria-invalid') === 'true') clearError(input); });
     });
 
-    // 7a. Contacto
     const contactForm = document.getElementById('contact-form');
     const contactStatus = document.getElementById('form-feedback');
     contactForm.addEventListener('submit', async (e) => {
@@ -239,9 +257,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    feedbackForm.querySelectorAll('input[name="nps"]').forEach((radio) => {
+        radio.addEventListener('change', () => {
+            feedbackForm.querySelectorAll('#nps-error').forEach((el) => el.remove());
+            feedbackForm.querySelectorAll('input[name="nps"]').forEach((r) => r.removeAttribute('aria-invalid'));
+        });
+    });
 
-
-    /* ---------- 8. REGISTRO ANTICIPADO / NEWSLETTER Y METAS ---------- */
     const meter = document.getElementById('meter');
     const meterCount = document.getElementById('meter-count');
     async function loadMilestone() {
@@ -283,4 +305,48 @@ document.addEventListener('DOMContentLoaded', () => {
             button.disabled = false;
         }
     });
+
+    const testimonials = document.getElementById('testimonials');
+    function renderProfiles(users) {
+        testimonials.textContent = '';
+        users.forEach((user) => {
+            const card = document.createElement('article');
+            card.className = 'card quote animate-on-scroll visible';
+
+            const img = document.createElement('img');
+            img.src = user.picture.medium;
+            img.alt = 'Foto de ejemplo de ' + user.name.first + ' ' + user.name.last;
+            img.width = 72;
+            img.height = 72;
+            img.loading = 'lazy';
+
+            const quote = document.createElement('blockquote');
+            const p = document.createElement('p');
+            p.textContent = 'Aquí aparecerá la opinión de una persona que pruebe la demo.';
+            const footer = document.createElement('footer');
+            const cite = document.createElement('cite');
+            cite.textContent = user.name.first + ' ' + user.name.last + ' · perfil de ejemplo';
+            footer.appendChild(cite);
+            quote.append(p, footer);
+
+            card.append(img, quote);
+            testimonials.appendChild(card);
+        });
+    }
+    async function loadProfiles() {
+        try {
+            const response = await fetch('https://randomuser.me/api/?results=3&inc=name,picture');
+            if (!response.ok) throw new Error('Error HTTP: ' + response.status);
+            const data = await response.json();
+            renderProfiles(data.results);
+        } catch (err) {
+            console.error('No se pudieron cargar los perfiles de ejemplo:', err);
+            testimonials.textContent = '';
+            const msg = document.createElement('p');
+            msg.className = 'loading';
+            msg.textContent = 'No se pudieron cargar los perfiles de ejemplo por ahora.';
+            testimonials.appendChild(msg);
+        }
+    }
+    loadProfiles();
 });

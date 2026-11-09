@@ -11,7 +11,6 @@ app.use(cors());
 app.use(express.json({ limit: '20kb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Base de datos SQLite (crea database.sqlite automáticamente)
 const db = new sqlite3.Database(path.join(__dirname, 'database.sqlite'), (err) => {
     if (err) {
         console.error('Error conectando a la base de datos SQLite:', err.message);
@@ -32,13 +31,10 @@ const db = new sqlite3.Database(path.join(__dirname, 'database.sqlite'), (err) =
             mensaje TEXT NOT NULL,
             fecha DATETIME DEFAULT CURRENT_TIMESTAMP
         )`);
-       
-        // Bases creadas con la versión anterior: agrega la columna src si falta
         db.run('ALTER TABLE newsletter ADD COLUMN src TEXT', () => {});
     });
 });
 
-// ---------- Utilidades de validación (la validación del servidor manda) ----------
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const clean = (value, max) => (typeof value === 'string' ? value.trim().slice(0, max) : '');
 const cleanSrc = (value) => (typeof value === 'string' && /^[a-z0-9_]{1,40}$/.test(value) ? value : 'directo');
@@ -47,7 +43,6 @@ const likert = (value) => {
     return Number.isInteger(n) && n >= 1 && n <= 5 ? n : null;
 };
 
-// ---------- Newsletter / registro anticipado ----------
 app.post('/subscribe', (req, res) => {
     const email = clean(req.body.email, 254);
     if (!email) return res.status(400).json({ message: 'El correo electrónico es requerido.' });
@@ -71,7 +66,6 @@ app.post('/subscribe', (req, res) => {
     });
 });
 
-// Conteo para la barra de metas comunitarias (solo el total, sin datos personales)
 app.get('/stats', (req, res) => {
     db.get('SELECT COUNT(*) AS total FROM newsletter', (err, row) => {
         if (err) {
@@ -82,7 +76,6 @@ app.get('/stats', (req, res) => {
     });
 });
 
-// ---------- Contacto ----------
 app.post('/contact', (req, res) => {
     const name = clean(req.body.name, 100);
     const email = clean(req.body.email, 254);

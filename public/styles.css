@@ -1,12 +1,5 @@
-/* =========================================================
-   YOLCATL · styles.css
-   Mobile-first. Orden: 1 tokens · 2 reset · 3 base · 4 layout
-   · 5 componentes · 6 secciones · 7 temas · 8 utilidades/movimiento
-   ========================================================= */
 
-/* ---------- 1. TOKENS ---------- */
 :root {
-  /* Paleta del GDD */
   --c-papel: #E4007C;
   --c-papel-deep: #B0005F;
   --c-marigold: #FF7F00;
@@ -17,7 +10,6 @@
   --c-lime: #00FF85;
   --c-earth: #3E2C22;
 
-  /* Semánticos · tema Día */
   --bg: #FDF5E6;
   --bg-alt: #FFFFFF;
   --bg-soft: #F7EBD2;
@@ -32,7 +24,6 @@
   --focus: var(--c-talavera);
   --chip-bg: #FFE9C7;
 
-  /* Tipografía (escala 1.25) */
   --font-heading: "Lilita One", "Arial Rounded MT Bold", system-ui, sans-serif;
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --fs-sm: 0.8rem;
@@ -43,7 +34,6 @@
   --fs-3xl: 2.441rem;
   --fs-4xl: 3.052rem;
 
-  /* Espaciado */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.5rem;
@@ -51,7 +41,6 @@
   --space-xl: 4rem;
   --space-2xl: 6rem;
 
-  /* Bordes y sombras "pop" */
   --radius: 0.75rem;
   --radius-pill: 999px;
   --shadow-pop: 4px 4px 0 0 var(--shadow-color);
@@ -60,7 +49,6 @@
   --header-h: 4.5rem;
 }
 
-/* ---------- 7 (anticipado). TEMA NOCHE · GDD 1.5.3 ---------- */
 html.dark {
   --bg: #121212;
   --bg-alt: #1B1613;
@@ -85,7 +73,6 @@ html.dark {
   }
 }
 
-/* ---------- 2. RESET ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; padding: 0; }
 html {
@@ -97,7 +84,6 @@ img, svg, video { display: block; max-width: 100%; height: auto; }
 button, input, select, textarea { font: inherit; color: inherit; }
 ul, ol { list-style: none; }
 
-/* ---------- 3. BASE ---------- */
 body {
   font-family: var(--font-body);
   font-size: var(--fs-base);
@@ -134,7 +120,6 @@ footer :focus-visible { outline-color: #fff; }
 html.dark .eyebrow { background: #002B73; color: #fff; }
 .text-accent { color: var(--accent-text); }
 
-/* ---------- 4. LAYOUT (Flexbox y Grid, mobile-first) ---------- */
 .grid { display: grid; gap: var(--space-md); grid-template-columns: 1fr; }
 .grid > * { min-width: 0; }
 .cards-grid { display: grid; gap: var(--space-md); grid-template-columns: 1fr; }
@@ -157,8 +142,6 @@ html.dark .eyebrow { background: #002B73; color: #fff; }
   .section { padding-block: var(--space-2xl); }
 }
 
-/* ---------- 5. COMPONENTES ---------- */
-/* Botones */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
   padding: 0.6rem 1.1rem; border: 2px solid var(--border); border-radius: var(--radius);
@@ -176,7 +159,6 @@ html.dark .eyebrow { background: #002B73; color: #fff; }
 .btn[aria-disabled="true"] { background: #BDB4A8; color: #2B2B2B; cursor: not-allowed; box-shadow: none; transform: none; }
 .btn-flat { background: transparent; border: 0; cursor: pointer; }
 
-/* Tarjetas */
 .card {
   background: var(--panel); border: 2px solid var(--border); border-radius: var(--radius);
   box-shadow: var(--shadow-pop); padding: var(--space-md);
@@ -195,7 +177,6 @@ html.dark .eyebrow { background: #002B73; color: #fff; }
 .icon-dot.agave { background: var(--c-agave); color: #fff; }
 .icon-dot.talavera { background: var(--c-talavera); color: #fff; }
 
-/* Marcos de imagen */
 .frame { border: 4px solid var(--border); border-radius: 1rem; overflow: hidden; box-shadow: var(--shadow-pop-lg); background: var(--panel); }
 .frame img { width: 100%; height: 100%; object-fit: cover; }
 .figure-cap { margin-top: 0.75rem; font-size: 0.85rem; color: var(--muted); }
@@ -205,7 +186,6 @@ html.dark .eyebrow { background: #002B73; color: #fff; }
 .phone-ui span { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 2px solid #000; border-radius: 50%; background: rgba(255,255,255,.8); font-weight: 800; font-size: 0.85rem; color: #000; }
 .phone-ui span:last-child { background: var(--c-papel); color: #fff; }
 
-/* Listas con tarjetas */
 .feature-list > li + li { margin-top: var(--space-sm); }
 .steps { counter-reset: step; }
 .steps > li { counter-increment: step; position: relative; padding-left: 3.25rem; }
@@ -217,11 +197,9 @@ html.dark .eyebrow { background: #002B73; color: #fff; }
 .steps > li.card { padding-left: 3.5rem; }
 .steps > li.card::before { top: 1.1rem; left: 1.1rem; }
 
-/* Chips */
 .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .chip { padding: 0.25rem 0.75rem; border: 2px solid var(--border); border-radius: var(--radius-pill); background: var(--chip-bg); font-size: 0.8rem; font-weight: 700; color: var(--text); }
 
-/* Formularios */
 .form { display: grid; gap: var(--space-sm); }
 .field { display: grid; gap: 0.35rem; min-width: 0; }
 .field label, .fieldset legend { font-weight: 700; font-size: 0.92rem; }
@@ -242,15 +220,25 @@ html.dark .form-status.ok { color: var(--c-lime); }
 html.dark .form-status.fail { color: #FF8A99; }
 .fieldset { border: 2px solid var(--border); border-radius: var(--radius); padding: var(--space-sm); min-width: 0; }
 .fieldset legend { padding-inline: 0.4rem; }
+.scale { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-block: 0.5rem; }
+.scale-opt { position: relative; }
+.scale-opt input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.scale-opt span {
+  display: grid; place-items: center; min-width: 2.5rem; height: 2.5rem; padding-inline: 0.5rem;
+  border: 2px solid var(--border); border-radius: 0.5rem; background: var(--panel-soft);
+  font-weight: 800; transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.scale-opt:hover span { background: var(--chip-bg); transform: translateY(-2px); }
+.scale-opt input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+.scale-opt input:checked + span { background: var(--c-marigold); color: #000; }
+.scale.wide .scale-opt span { padding-inline: 0.9rem; }
+.pill-note { font-size: 0.8rem; color: var(--muted); display: flex; justify-content: space-between; gap: 1rem; }
 
-
-/* Barra de metas */
 .meter { width: 100%; height: 1.4rem; border: 2px solid var(--border); border-radius: var(--radius-pill); overflow: hidden; background: var(--panel-soft); appearance: none; -webkit-appearance: none; }
 .meter::-webkit-progress-bar { background: var(--panel-soft); }
 .meter::-webkit-progress-value { background: var(--c-papel); }
 .meter::-moz-progress-bar { background: var(--c-papel); }
 
-/* Cabecera y navegación */
 .site-header { position: fixed; inset: 0 0 auto 0; z-index: 40; background: var(--bg); }
 .site-header::after {
   content: ""; position: absolute; inset: auto 0 0 0; height: 8px;
@@ -286,7 +274,6 @@ html.dark .form-status.fail { color: #FF8A99; }
   .nav-links a { padding: 0.4rem 0.6rem; font-size: 0.88rem; }
 }
 
-/* Interruptor Día / Noche */
 .theme-switch {
   position: fixed; left: 1rem; bottom: 1rem; z-index: 50; display: inline-flex; padding: 4px;
   background: var(--panel); border: 2px solid var(--border); border-radius: var(--radius-pill); box-shadow: var(--shadow-pop);
@@ -307,8 +294,6 @@ html:not(.dark) #btn-noche { color: var(--text); }
 html.dark #btn-noche { color: #000; }
 @media (min-width: 640px) { .theme-btn { width: 6rem; font-size: 0.85rem; } }
 
-/* ---------- 6. SECCIONES ---------- */
-/* Hero */
 .hero { display: flex; flex-direction: column; justify-content: center; min-height: 90vh; padding-top: calc(var(--header-h) + 2.5rem); padding-bottom: var(--space-xl); animation: fade-in 0.8s ease-out; }
 .hero-grid { display: grid; gap: var(--space-lg); grid-template-columns: 1fr; align-items: center; }
 .hero-grid > * { min-width: 0; }
@@ -323,16 +308,13 @@ html.dark #btn-noche { color: #000; }
 .hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1.05fr 0.95fr; gap: var(--space-xl); } }
 
-/* Imágenes día/noche */
 .img-night { display: none; }
 html.dark .img-night { display: block; }
 html.dark .img-day { display: none; }
 
-/* Pilares */
 .pillars { margin-top: var(--space-lg); }
 .pillars h3 { font-family: var(--font-heading); font-weight: 400; text-transform: uppercase; font-size: var(--fs-xl); margin-bottom: var(--space-sm); }
 
-/* Pestañas */
 .tablist { display: none; flex-wrap: wrap; gap: 0.5rem; margin-bottom: var(--space-md); padding-bottom: var(--space-sm); border-bottom: 4px solid var(--border); }
 .js .tablist { display: flex; }
 .tab-btn {
@@ -358,7 +340,6 @@ html.dark .mini.noche { background: #2C2347; color: var(--text); }
 @media (min-width: 640px) { .mini-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .mini-grid { grid-template-columns: repeat(4, 1fr); } .tab-box { padding: var(--space-lg); } }
 
-/* Bestiario: poderes ligados al interruptor Día / Noche */
 .reveal-note { max-width: 40rem; margin: 0 auto var(--space-lg); padding: 0.75rem 1rem; border: 2px solid var(--c-marigold); border-radius: 0.6rem; background: #FFF0C2; color: #3E2A00; text-align: center; font-weight: 700; }
 html.dark .reveal-note { background: #1F2E33; border-color: var(--c-cyan); color: #CFF8FF; }
 .beast { display: flex; flex-direction: column; border-top-width: 8px; }
@@ -375,7 +356,6 @@ html.dark .reveal-note { background: #1F2E33; border-color: var(--c-cyan); color
 .js.dark .power-defensa, .js.dark .label-defensa { display: block; }
 .js.dark .power-hacienda, .js.dark .label-hacienda { display: none; }
 
-/* Galería y lightbox */
 .trailer { position: relative; margin-bottom: var(--space-lg); }
 .trailer img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 .trailer-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-sm); padding: var(--space-sm) 0 0; }
@@ -394,7 +374,6 @@ html.dark .reveal-note { background: #1F2E33; border-color: var(--c-cyan); color
 .lightbox p { margin: 0.75rem 0; font-weight: 600; }
 .lightbox-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: space-between; }
 
-/* Demo */
 .demo-grid { display: grid; gap: var(--space-lg); grid-template-columns: 1fr; }
 .demo-grid > * { min-width: 0; }
 @media (min-width: 1024px) { .demo-grid { grid-template-columns: 1fr 1fr; } }
@@ -412,7 +391,6 @@ html.dark .card p.tag-gold { color: #000; }
 .inline-form { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .inline-form .field { flex: 1 1 12rem; }
 
-/* Comunidad / equipo / aliados */
 .quote { margin: 0; }
 .quote img { width: 4.5rem; height: 4.5rem; border: 2px solid var(--border); border-radius: 50%; margin-bottom: 0.75rem; }
 .quote blockquote p { font-style: italic; margin-bottom: 0.5rem; }
@@ -427,7 +405,16 @@ html.dark .card p.tag-gold { color: #000; }
 .ally .btn { margin-top: var(--space-sm); }
 .loading { padding: var(--space-sm); font-weight: 700; color: var(--muted); }
 
-/* Footer */
+.social-grid { display: grid; gap: var(--space-md); grid-template-columns: 1fr; }
+.social-grid > * { min-width: 0; }
+@media (min-width: 640px) { .social-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .social-grid { grid-template-columns: repeat(3, 1fr); } }
+.social-card .btn { margin-top: var(--space-xs); }
+.social-link { display: inline-block; margin-top: 0.25rem; font-weight: 800; color: var(--accent-text); text-decoration: underline; text-underline-offset: 4px; overflow-wrap: anywhere; }
+.social-link:hover { text-decoration-thickness: 3px; }
+.social-note { margin-top: var(--space-md); }
+.footer-list a { overflow-wrap: anywhere; }
+
 .site-footer { margin-top: 0; padding-block: var(--space-xl) var(--space-lg); background: var(--c-talavera); color: #fff; border-top: 4px solid #000; }
 .footer-grid { display: grid; gap: var(--space-lg); grid-template-columns: 1fr; }
 .footer-grid > * { min-width: 0; }
@@ -441,7 +428,6 @@ html.dark .card p.tag-gold { color: #000; }
 @media (min-width: 768px) { .footer-grid { grid-template-columns: 1.6fr 1fr 1fr; } }
 @media (min-width: 1024px) { .footer-links-row { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; } }
 
-/* ---------- 8. UTILIDADES Y MOVIMIENTO ---------- */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .skip-link:focus { position: fixed; top: 0.5rem; left: 0.5rem; z-index: 100; width: auto; height: auto; margin: 0; padding: 0.6rem 1rem; clip: auto; background: #fff; color: #000; border: 2px solid #000; font-weight: 800; }
 main:focus { outline: none; }

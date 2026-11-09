@@ -11,7 +11,6 @@
     <title>Yolcatl · Cozy Farming y Bullet Heaven</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
-    <!-- Tema sin parpadeo: aplica la clase antes de pintar (único script en línea) -->
     <script>
         (function () {
             var saved = null;
@@ -33,7 +32,6 @@
 <body>
     <a href="#contenido" class="sr-only skip-link">Saltar al contenido principal</a>
 
-    <!-- Interruptor Día / Noche: también revela los poderes de defensa del bestiario -->
     <div class="theme-switch" role="group" aria-label="Tema de color">
         <button id="btn-dia" class="theme-btn" type="button" aria-pressed="true"><span aria-hidden="true">☀️</span> DÍA</button>
         <button id="btn-noche" class="theme-btn" type="button" aria-pressed="false"><span aria-hidden="true">🌙</span> NOCHE</button>
@@ -42,7 +40,7 @@
 
     <header class="site-header">
         <nav class="container navbar" aria-label="Navegación principal">
-            <a href="#hero" class="brand"><img src="assets/logo.jpg" alt="Yolcatl, ir al inicio" width="900" height="145"></a>
+            <a href="#hero" class="brand"><img src="assets/logo.png" alt="Yolcatl, ir al inicio" width="900" height="145"></a>
             <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
                 <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
             </button>
@@ -51,6 +49,9 @@
                 <li><a href="#ciclo">Ciclo</a></li>
                 <li><a href="#alquimia">Alquimia</a></li>
                 <li><a href="#metamorfosis">Bestiario</a></li>
+                <li><a href="#showcase">Galería</a></li>
+                <li><a href="#equipo">Equipo</a></li>
+                <li><a href="#aliados">Aliados</a></li>
                 <li><a href="#contacto">Contacto</a></li>
                 <li><a href="#demo" class="btn" data-track="cta_demo_nav">Probar la demo</a></li>
             </ul>
@@ -59,15 +60,14 @@
 
     <main id="contenido" tabindex="-1">
 
-        <!-- US-04 · ¿De qué trata Yolcatl? -->
         <section id="hero" class="container hero" aria-labelledby="hero-title">
             <div class="hero-grid">
                 <div>
                     <p class="hero-badge">Cozy Farming · Bullet Heaven</p>
                     <h1 id="hero-title">
-                        Yolcatl: cultiva de día, sobrevive de noche
-                        <span class="tagline">Despierta al nahual que llevas dentro</span>
-                    </h1>
+    Despierta al nahual que llevas dentro
+    <span class="tagline">Yolcatl: cultiva de día, sobrevive de noche</span>
+</h1>
                     <p class="pitch">Cuida una hacienda mística de día, cura animales sagrados con medicina de molcajete y, de noche, toma su forma de nahual para defender el santuario de Las Entidades. Un jugador, sin conexión.</p>
                     <p class="slogan">«Planta esta semilla en la vida real y cultiva tu jardín en Yolcatl».</p>
                     <div class="hero-actions">
@@ -87,7 +87,6 @@
             </div>
         </section>
 
-        <!-- US-06 · ¿Qué historia y qué valor ofrece? -->
         <section id="hacienda" class="section section-alt" aria-labelledby="hacienda-title">
             <div class="container">
                 <div class="section-head animate-on-scroll">
@@ -141,7 +140,6 @@
             </div>
         </section>
 
-        <!-- US-07 · ¿Qué haré de día y de noche? -->
         <section id="ciclo" class="section container" aria-labelledby="ciclo-title">
             <div class="section-head animate-on-scroll">
                 <h2 id="ciclo-title">El ciclo de juego</h2>
@@ -180,7 +178,6 @@
             </div>
         </section>
 
-        <!-- US-07 · ¿Qué lo hace diferente? (alquimia sin AR) -->
         <section id="alquimia" class="section section-soft" aria-labelledby="alquimia-title">
             <div class="container split">
                 <figure class="animate-on-scroll">
@@ -202,7 +199,6 @@
             </div>
         </section>
 
-        <!-- ¿Cómo se desbloquean los cosméticos AR? -->
         <section id="ar" class="section container" aria-labelledby="ar-title">
             <div class="split">
                 <div>
@@ -225,7 +221,6 @@
             </div>
         </section>
 
-        <!-- US-07 · ¿Qué animales y poderes hay? -->
         <section id="metamorfosis" class="section section-alt" aria-labelledby="metamorfosis-title">
             <div class="container">
                 <div class="section-head animate-on-scroll" style="margin-inline:auto;text-align:center">
@@ -268,7 +263,26 @@
             </div>
         </section>
 
-        <!-- US-32 · ¿Puedo probarlo en mi equipo? -->
+        <section id="showcase" class="section container" aria-labelledby="showcase-title">
+            <div class="section-head animate-on-scroll">
+                <h2 id="showcase-title">Tráiler y capturas</h2>
+                <p>Un vistazo a la hacienda, la granja, la defensa nocturna y el molcajete. Todas las imágenes actuales son capturas conceptuales.</p>
+            </div>
+            <figure class="trailer animate-on-scroll">
+                <div class="frame"><img src="assets/trailer-poster.svg" width="1280" height="720" loading="lazy" alt="Póster del tráiler de Yolcatl. El tráiler estará disponible próximamente"></div>
+                <figcaption class="trailer-bar">
+                    <span class="figure-cap" style="margin:0">Tráiler (≈ 1 min): próximamente.</span>
+                    <a class="btn btn-light" aria-disabled="true" data-track="trailer">Tráiler próximamente</a>
+                </figcaption>
+            </figure>
+            <div class="gallery" id="gallery">
+                <figure class="animate-on-scroll"><a href="assets/hacienda-dia.svg" data-caption="Hacienda de día · captura conceptual"><img src="assets/hacienda-dia.svg" width="800" height="600" loading="lazy" alt="Hacienda de día con parcelas y animales (captura conceptual). Ampliar imagen"></a><figcaption>Hacienda de día · captura conceptual</figcaption></figure>
+                <figure class="animate-on-scroll"><a href="assets/granja-isometrica.svg" data-caption="Granja en vista isométrica · captura conceptual"><img src="assets/granja-isometrica.svg" width="800" height="600" loading="lazy" alt="Granja en vista isométrica (captura conceptual). Ampliar imagen"></a><figcaption>Granja isométrica · captura conceptual</figcaption></figure>
+                <figure class="animate-on-scroll"><a href="assets/bullet-heaven.svg" data-caption="Combate nocturno top-down · captura conceptual"><img src="assets/bullet-heaven.svg" width="800" height="600" loading="lazy" alt="Combate nocturno en vista cenital contra las Entidades (captura conceptual). Ampliar imagen"></a><figcaption>Bullet heaven · captura conceptual</figcaption></figure>
+                <figure class="animate-on-scroll"><a href="assets/molcajete.svg" data-caption="Estación del molcajete · captura conceptual"><img src="assets/molcajete.svg" width="800" height="600" loading="lazy" alt="Estación del molcajete (captura conceptual). Ampliar imagen"></a><figcaption>Molcajete · captura conceptual</figcaption></figure>
+            </div>
+        </section>
+
         <section id="demo" class="section section-soft" aria-labelledby="demo-title">
             <div class="container">
                 <div class="section-head animate-on-scroll">
@@ -311,12 +325,88 @@
             </div>
         </section>
 
-        <!-- US-08 · ¿Cómo contacto al equipo? -->
+        <section id="voces" class="section container" aria-labelledby="voces-title">
+            <div class="section-head animate-on-scroll">
+                <h2 id="voces-title">Voces de la comunidad</h2>
+                <p>Perfiles de ejemplo: son personas generadas al azar y no opiniones reales. Las reacciones verdaderas llegarán con las primeras pruebas.</p>
+            </div>
+            <div id="testimonials" class="cards-grid" aria-live="polite"><p class="loading" role="status">Cargando perfiles de ejemplo…</p></div>
+        </section>
+
+        <section id="equipo" class="section section-alt" aria-labelledby="equipo-title">
+            <div class="container">
+                <div class="section-head animate-on-scroll">
+                    <h2 id="equipo-title">Equipo y ficha técnica</h2>
+                    <p>Quién construye Yolcatl y en qué estado está el proyecto.</p>
+                </div>
+                <div class="team-grid">
+                    <article class="card team-card animate-on-scroll">
+                        <div class="card-row"><span class="avatar" aria-hidden="true">L</span><div><h3>Leonardo Gael Nuñez Magaña</h3><p>Desarrollo web y técnico</p></div></div>
+                        <ul><li>Estructura HTML y JavaScript</li><li>Validación y telemetría</li><li>Publicación y QA técnica</li></ul>
+                    </article>
+                    <article class="card team-card animate-on-scroll">
+                        <div class="card-row"><span class="avatar alt" aria-hidden="true">A</span><div><h3>Aranza Daniela Fuentes Vázquez</h3><p>Diseño y marketing</p></div></div>
+                        <ul><li>Sistema de diseño y copy</li><li>Funnel y cuestionario</li><li>Pruebas de accesibilidad</li></ul>
+                    </article>
+                    <article class="card animate-on-scroll">
+                        <h3 class="card-title">Ficha técnica</h3>
+                        <dl class="spec">
+                            <div><dt>Título</dt><dd>Yolcatl</dd></div>
+                            <div><dt>Género</dt><dd>Simulador de granja mística + bullet heaven</dd></div>
+                            <div><dt>Plataformas</dt><dd>Android (demo) · PC planeada</dd></div>
+                            <div><dt>Motor / herramientas</dt><dd>Por confirmar</dd></div>
+                            <div><dt>Documento de diseño</dt><dd>GDD v1.4</dd></div>
+                            <div><dt>Estado</dt><dd>Prototipo / demo</dd></div>
+                            <div><dt>Fecha</dt><dd>Noviembre de 2026</dd></div>
+                        </dl>
+                        <p class="hint">¿Quieres escribirnos? Usa el <a href="#contacto">formulario de contacto</a>.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="aliados" class="section container" aria-labelledby="aliados-title">
+            <div class="section-head animate-on-scroll">
+                <h2 id="aliados-title">Proyectos aliados</h2>
+                <p>Otros juegos hechos por compañeros que vale la pena visitar.</p>
+            </div>
+            <div class="grid grid-2">
+                <article class="card ally animate-on-scroll">
+                    <img src="assets/aliado-1.svg" width="600" height="400" loading="lazy" alt="Imagen del primer proyecto aliado, por confirmar">
+                    <h3>Proyecto aliado 1 (por confirmar)</h3>
+                    <p>Aquí irá la sinopsis del primer proyecto de un compañero de clase, en máximo 280 caracteres.</p>
+                    <a class="btn btn-light" aria-disabled="true" data-track="aliado_1">Enlace próximamente</a>
+                </article>
+                <article class="card ally animate-on-scroll">
+                    <img src="assets/aliado-2.svg" width="600" height="400" loading="lazy" alt="Imagen del segundo proyecto aliado, por confirmar">
+                    <h3>Proyecto aliado 2 (por confirmar)</h3>
+                    <p>Aquí irá la sinopsis del segundo proyecto de un compañero de clase, en máximo 280 caracteres.</p>
+                    <a class="btn btn-light" aria-disabled="true" data-track="aliado_2">Enlace próximamente</a>
+                </article>
+            </div>
+        </section>
+
+<section id="feedback" class="section section-soft" aria-labelledby="feedback-title">
+    <div class="container">
+        <div class="section-head animate-on-scroll">
+            <h2 id="feedback-title">Cuéntanos qué te pareció</h2>
+            <p>Tu opinión nos ayuda a mejorar el juego. El cuestionario toma menos de 3 minutos en completarse.</p>
+        </div>
+        <div class="card animate-on-scroll" style="text-align: center; padding-block: var(--space-xl);">
+            <h3 style="margin-bottom: var(--space-md);">Ayúdanos contestando unas preguntas rápidas</h3>
+            <a href="docs.google.com/forms/" target="_blank" rel="noopener noreferrer" class="btn btn-lg" data-track="feedback_forms">
+                Ir al cuestionario <span aria-hidden="true">↗️</span>
+                <span class="sr-only"> (se abre en una pestaña nueva)</span>
+            </a>
+        </div>
+    </div>
+</section>
+
         <section id="contacto" class="section container" aria-labelledby="contacto-title">
             <div class="split">
                 <div class="section-head animate-on-scroll" style="margin-bottom:0">
                     <h2 id="contacto-title">Contacto</h2>
-                    <p>Prensa, colaboraciones o dudas: cuéntanos y te respondemos. Si eres creador de contenido, descarga también el <a href="KitPrensa.zip" download>Kit de Prensa</a>.</p>
+                    <p>Prensa, colaboraciones o dudas: cuéntanos y te respondemos. Si eres creador de contenido, descarga también el <a href="KitPrensa.zip" download>Kit de Prensa</a>. También puedes escribirnos a <a href="mailto:yolcatl.firecat@gmail.com" data-track="correo_contacto">yolcatl.firecat@gmail.com</a>.</p>
                 </div>
                 <form id="contact-form" class="form card" action="#" method="post" novalidate>
                     <div class="field">
@@ -336,13 +426,73 @@
                 </form>
             </div>
         </section>
+        <section id="comunidad" class="section section-alt" aria-labelledby="comunidad-title">
+            <div class="container">
+                <div class="section-head animate-on-scroll">
+                    <h2 id="comunidad-title">Comunidad y redes</h2>
+                    <p>Sigue el desarrollo de Yolcatl, descubre el lore y escríbenos. Los avances se publicarán en estos canales.</p>
+                </div>
+                <ul class="social-grid" aria-label="Canales de la comunidad">
+                    <li class="card social-card animate-on-scroll">
+                        <div class="card-row">
+                            <span class="icon-dot papel" aria-hidden="true">✉️</span>
+                            <div>
+                                <h3>Correo</h3>
+                                <p>Prensa, colaboraciones y dudas.</p>
+                                <a class="social-link" href="mailto:yolcatl.firecat@gmail.com" data-track="red_correo">yolcatl.firecat@gmail.com</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card social-card animate-on-scroll">
+                        <div class="card-row">
+                            <span class="icon-dot" aria-hidden="true">💬</span>
+                            <div>
+                                <h3>Discord</h3>
+                                <p>Comunidad, lore profundo y avisos de pruebas.</p>
+                                <a class="btn btn-light" aria-disabled="true" data-track="red_discord">Enlace próximamente</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card social-card animate-on-scroll">
+                        <div class="card-row">
+                            <span class="icon-dot" aria-hidden="true">▶️</span>
+                            <div>
+                                <h3>YouTube</h3>
+                                <p>Tráiler y videos sobre la fauna y la herbolaria del juego.</p>
+                                <a class="btn btn-light" aria-disabled="true" data-track="red_youtube">Enlace próximamente</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card social-card animate-on-scroll">
+                        <div class="card-row">
+                            <span class="icon-dot" aria-hidden="true">📷</span>
+                            <div>
+                                <h3>Instagram</h3>
+                                <p>Arte, pines y avances visuales.</p>
+                                <a class="btn btn-light" aria-disabled="true" data-track="red_instagram">Enlace próximamente</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card social-card animate-on-scroll">
+                        <div class="card-row">
+                            <span class="icon-dot" aria-hidden="true">🎵</span>
+                            <div>
+                                <h3>TikTok</h3>
+                                <p>Devlogs ASMR, proceso de dibujo y curiosidades de mitología y plantas.</p>
+                                <a class="btn btn-light" aria-disabled="true" data-track="red_tiktok">Enlace próximamente</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <p class="hint social-note">Los canales marcados como «próximamente» se activarán cuando estén publicados.</p>
+            </div>
+        </section>
     </main>
-
     <footer class="site-footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <img src="assets/logo.jpg" alt="Logotipo de Yolcatl" width="900" height="145">
+                    <img src="assets/logo.png" alt="Logotipo de Yolcatl" width="900" height="145">
                     <p>Cozy farming y bullet heaven con herbolaria, alebrijes y nahuales. Hecho con respeto a la cultura mesoamericana.</p>
                 </div>
                 <nav aria-label="Explorar el sitio">
@@ -353,6 +503,7 @@
                         <li><a href="#alquimia">Alquimia</a></li>
                         <li><a href="#metamorfosis">Bestiario</a></li>
                         <li><a href="#demo" data-track="cta_demo_footer">Probar la demo</a></li>
+                        <li><a href="#comunidad">Comunidad y redes</a></li>
                     </ul>
                 </nav>
                 <nav aria-label="Recursos para creadores">
@@ -360,6 +511,7 @@
                     <ul class="footer-list">
                         <li><a href="KitPrensa.zip" download>Kit de Prensa<span class="sr-only"> (descargar archivo ZIP)</span></a></li>
                         <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="mailto:yolcatl.firecat@gmail.com" data-track="correo_footer">yolcatl.firecat@gmail.com</a></li>
                         <li><a href="https://nahuatl.wired-humanities.org" target="_blank" rel="noopener noreferrer">Glosario náhuatl<span class="sr-only"> (se abre en una pestaña nueva)</span></a></li>
                     </ul>
                 </nav>
@@ -367,5 +519,17 @@
             <p class="footer-bottom">&copy; 2026 Yolcatl. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <dialog id="lightbox" class="lightbox" aria-labelledby="lightbox-caption">
+        <div class="lightbox-inner">
+            <img id="lightbox-img" src="assets/hacienda-dia.svg" alt="">
+            <p id="lightbox-caption"></p>
+            <div class="lightbox-bar">
+                <button type="button" class="btn btn-light" id="lb-prev">← Anterior</button>
+                <button type="button" class="btn btn-light" id="lb-next">Siguiente →</button>
+                <button type="button" class="btn" id="lb-close">Cerrar</button>
+            </div>
+        </div>
+    </dialog>
 </body>
 </html>
