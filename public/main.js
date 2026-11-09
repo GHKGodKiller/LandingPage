@@ -256,14 +256,6 @@ document.addEventListener('DOMContentLoaded', () => {
             button.disabled = false;
         }
     });
-
-    feedbackForm.querySelectorAll('input[name="nps"]').forEach((radio) => {
-        radio.addEventListener('change', () => {
-            feedbackForm.querySelectorAll('#nps-error').forEach((el) => el.remove());
-            feedbackForm.querySelectorAll('input[name="nps"]').forEach((r) => r.removeAttribute('aria-invalid'));
-        });
-    });
-
     const meter = document.getElementById('meter');
     const meterCount = document.getElementById('meter-count');
     async function loadMilestone() {

@@ -68,7 +68,7 @@
     Despierta al nahual que llevas dentro
     <span class="tagline">Yolcatl: cultiva de día, sobrevive de noche</span>
 </h1>
-                    <p class="pitch">Cuida una hacienda mística de día, cura animales sagrados con medicina de molcajete y, de noche, toma su forma de nahual para defender el santuario de Las Entidades. Un jugador, sin conexión.</p>
+                    <p class="pitch">Cuida una hacienda mística de día, cura animales sagrados con medicina hecha en un molcajete y, de noche, toma su forma de nahual para defender el santuario de Las Entidades. Un jugador, sin conexión.</p>
                     <p class="slogan">«Planta esta semilla en la vida real y cultiva tu jardín en Yolcatl».</p>
                     <div class="hero-actions">
                         <a href="#demo" class="btn btn-pill" data-track="cta_demo_hero">Probar la demo</a>
@@ -124,8 +124,14 @@
                         </article>
                     </div>
                     <figure class="animate-on-scroll">
-                        <div class="frame"><img src="assets/alebrijes-guardianes.svg" width="600" height="800" loading="lazy" alt="Ilustración conceptual de alebrijes protectores y espíritus guardianes de la naturaleza"></div>
-                        <figcaption class="figure-cap">Arte conceptual: alebrijes y Guardianes del santuario.</figcaption>
+                        <div class="frame">
+                            <img class="img-day" src="assets/alebrijes-guardianes.svg" width="600" height="800" loading="lazy" alt="Ilustración conceptual de alebrijes protectores y espíritus guardianes de la naturaleza">
+                            <img class="img-night" src="assets/entidades-noche.svg" width="600" height="800" loading="lazy" alt="Ilustración conceptual de las Entidades corrompidas en la noche">
+                        </div>
+                        <figcaption class="figure-cap">
+                            <span class="img-day">Arte conceptual: alebrijes y Guardianes del santuario.</span>
+                            <span class="img-night">Arte conceptual: las Entidades y la corrupción.</span>
+                        </figcaption>
                     </figure>
                 </div>
                 <div class="pillars">
@@ -332,7 +338,66 @@
             </div>
             <div id="testimonials" class="cards-grid" aria-live="polite"><p class="loading" role="status">Cargando perfiles de ejemplo…</p></div>
         </section>
-
+<section id="comunidad" class="section section-alt" aria-labelledby="comunidad-title">
+            <div class="container">
+                <div class="section-head animate-on-scroll">
+                    <h2 id="comunidad-title">Comunidad y redes</h2>
+                    <p>Sigue el desarrollo de Yolcatl, descubre el lore y escríbenos. Los avances se publicarán en estos canales.</p>
+                </div>
+                <ul class="social-grid" aria-label="Canales de la comunidad">
+                    <li class="card social-card animate-on-scroll">
+                        <div class="card-row">
+                            <span class="icon-dot papel" aria-hidden="true">✉️</span>
+                            <div>
+                                <h3>Correo</h3>
+                                <p>Prensa, colaboraciones y dudas.</p>
+                                <a class="social-link" href="mailto:yolcatl.firecat@gmail.com" data-track="red_correo">yolcatl.firecat@gmail.com</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card social-card animate-on-scroll">
+                        <div class="card-row">
+                            <span class="icon-dot" aria-hidden="true">💬</span>
+                            <div>
+                                <h3>Discord</h3>
+                                <p>Comunidad, lore profundo y avisos de pruebas.</p>
+                                <a class="btn btn-light" href="https://discord.com" target="_blank" rel="noopener noreferrer" data-track="red_discord">Unirse a Discord ↗️</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card social-card animate-on-scroll">
+                        <div class="card-row">
+                            <span class="icon-dot" aria-hidden="true">▶️</span>
+                            <div>
+                                <h3>YouTube</h3>
+                                <p>Tráiler y videos sobre la fauna y la herbolaria del juego.</p>
+                                <a class="btn btn-light" href="https://youtube.com" target="_blank" rel="noopener noreferrer" data-track="red_youtube">Ver canal ↗️</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card social-card animate-on-scroll">
+                        <div class="card-row">
+                            <span class="icon-dot" aria-hidden="true">📷</span>
+                            <div>
+                                <h3>Instagram</h3>
+                                <p>Arte, pines y avances visuales.</p>
+                                <a class="btn btn-light" href="https://instagram.com" target="_blank" rel="noopener noreferrer" data-track="red_instagram">Seguir en Instagram ↗️</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card social-card animate-on-scroll">
+                        <div class="card-row">
+                            <span class="icon-dot" aria-hidden="true">🎵</span>
+                            <div>
+                                <h3>TikTok</h3>
+                                <p>Devlogs ASMR, proceso de dibujo y curiosidades de mitología y plantas.</p>
+                                <a class="btn btn-light" href="https://tiktok.com" target="_blank" rel="noopener noreferrer" data-track="red_tiktok">Seguir en TikTok ↗️</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
         <section id="equipo" class="section section-alt" aria-labelledby="equipo-title">
             <div class="container">
                 <div class="section-head animate-on-scroll">
@@ -341,12 +406,12 @@
                 </div>
                 <div class="team-grid">
                     <article class="card team-card animate-on-scroll">
-                        <div class="card-row"><span class="avatar" aria-hidden="true">L</span><div><h3>Leonardo Gael Nuñez Magaña</h3><p>Desarrollo web y técnico</p></div></div>
-                        <ul><li>Estructura HTML y JavaScript</li><li>Validación y telemetría</li><li>Publicación y QA técnica</li></ul>
+                        <div class="card-row"><span class="avatar" aria-hidden="true">L</span><div><h3>Leonardo Gael Nuñez Magaña</h3><p>Co-Fundador & Game Director / Narrative Lead Productor</p></div></div>
+                        <ul><li>Dirección de juego y producción</li><li>Diseño narrativo y autoría del GDD</li><li>Desarrollo de arte</li></ul>
                     </article>
                     <article class="card team-card animate-on-scroll">
-                        <div class="card-row"><span class="avatar alt" aria-hidden="true">A</span><div><h3>Aranza Daniela Fuentes Vázquez</h3><p>Diseño y marketing</p></div></div>
-                        <ul><li>Sistema de diseño y copy</li><li>Funnel y cuestionario</li><li>Pruebas de accesibilidad</li></ul>
+                        <div class="card-row"><span class="avatar alt" aria-hidden="true">A</span><div><h3>Aranza Daniela Fuentes Vázquez</h3><p>Co-Fundadora & Creative / Tech Lead</p></div></div>
+                        <ul><li>Programación de mecanicas</li><li>Liderazgo técnico (Tech Lead)</li><li>Implementación y estandarización</li></ul>
                     </article>
                     <article class="card animate-on-scroll">
                         <h3 class="card-title">Ficha técnica</h3>
@@ -357,7 +422,7 @@
                             <div><dt>Motor / herramientas</dt><dd>Por confirmar</dd></div>
                             <div><dt>Documento de diseño</dt><dd>GDD v1.4</dd></div>
                             <div><dt>Estado</dt><dd>Prototipo / demo</dd></div>
-                            <div><dt>Fecha</dt><dd>Noviembre de 2026</dd></div>
+                            <div><dt>Fecha</dt><dd>Diciembre de 2026</dd></div>
                         </dl>
                         <p class="hint">¿Quieres escribirnos? Usa el <a href="#contacto">formulario de contacto</a>.</p>
                     </article>
@@ -372,16 +437,16 @@
             </div>
             <div class="grid grid-2">
                 <article class="card ally animate-on-scroll">
-                    <img src="assets/aliado-1.svg" width="600" height="400" loading="lazy" alt="Imagen del primer proyecto aliado, por confirmar">
-                    <h3>Proyecto aliado 1 (por confirmar)</h3>
-                    <p>Aquí irá la sinopsis del primer proyecto de un compañero de clase, en máximo 280 caracteres.</p>
-                    <a class="btn btn-light" aria-disabled="true" data-track="aliado_1">Enlace próximamente</a>
+                    <img src="assets/aliado-1.svg" width="600" height="400" loading="lazy" alt="Imagen del proyecto Cazadores de Kaijus">
+                    <h3>Cazadores de Kaijus</h3>
+                    <p>Un juego que utiliza realidad aumentada (AR) para contar la historia. Sobreviviendo en un refugio, deberás encontrar piezas para ir desbloqueando la historia y descubrir pistas para tu siguiente objetivo.</p>
+                    <a href="https://khekev.github.io/cazadoresdekaijuspag/" target="_blank" rel="noopener noreferrer" class="btn btn-light" data-track="aliado_1">Ver proyecto ↗️</a>
                 </article>
                 <article class="card ally animate-on-scroll">
-                    <img src="assets/aliado-2.svg" width="600" height="400" loading="lazy" alt="Imagen del segundo proyecto aliado, por confirmar">
-                    <h3>Proyecto aliado 2 (por confirmar)</h3>
-                    <p>Aquí irá la sinopsis del segundo proyecto de un compañero de clase, en máximo 280 caracteres.</p>
-                    <a class="btn btn-light" aria-disabled="true" data-track="aliado_2">Enlace próximamente</a>
+                    <img src="assets/aliado-2.svg" width="600" height="400" loading="lazy" alt="Imagen del proyecto After The Storm">
+                    <h3>After The Storm</h3>
+                    <p>Juego de aventura narrativa y toma de decisiones en el cual el usuario responderá las preguntas de un psicólogo para recordar lo sucedido y cambiar los hechos mediante flashbacks.</p>
+                    <a href="https://afterthestorm.com" target="_blank" rel="noopener noreferrer" class="btn btn-light" data-track="aliado_2">Ver proyecto ↗️</a>
                 </article>
             </div>
         </section>
@@ -426,67 +491,7 @@
                 </form>
             </div>
         </section>
-        <section id="comunidad" class="section section-alt" aria-labelledby="comunidad-title">
-            <div class="container">
-                <div class="section-head animate-on-scroll">
-                    <h2 id="comunidad-title">Comunidad y redes</h2>
-                    <p>Sigue el desarrollo de Yolcatl, descubre el lore y escríbenos. Los avances se publicarán en estos canales.</p>
-                </div>
-                <ul class="social-grid" aria-label="Canales de la comunidad">
-                    <li class="card social-card animate-on-scroll">
-                        <div class="card-row">
-                            <span class="icon-dot papel" aria-hidden="true">✉️</span>
-                            <div>
-                                <h3>Correo</h3>
-                                <p>Prensa, colaboraciones y dudas.</p>
-                                <a class="social-link" href="mailto:yolcatl.firecat@gmail.com" data-track="red_correo">yolcatl.firecat@gmail.com</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="card social-card animate-on-scroll">
-                        <div class="card-row">
-                            <span class="icon-dot" aria-hidden="true">💬</span>
-                            <div>
-                                <h3>Discord</h3>
-                                <p>Comunidad, lore profundo y avisos de pruebas.</p>
-                                <a class="btn btn-light" aria-disabled="true" data-track="red_discord">Enlace próximamente</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="card social-card animate-on-scroll">
-                        <div class="card-row">
-                            <span class="icon-dot" aria-hidden="true">▶️</span>
-                            <div>
-                                <h3>YouTube</h3>
-                                <p>Tráiler y videos sobre la fauna y la herbolaria del juego.</p>
-                                <a class="btn btn-light" aria-disabled="true" data-track="red_youtube">Enlace próximamente</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="card social-card animate-on-scroll">
-                        <div class="card-row">
-                            <span class="icon-dot" aria-hidden="true">📷</span>
-                            <div>
-                                <h3>Instagram</h3>
-                                <p>Arte, pines y avances visuales.</p>
-                                <a class="btn btn-light" aria-disabled="true" data-track="red_instagram">Enlace próximamente</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="card social-card animate-on-scroll">
-                        <div class="card-row">
-                            <span class="icon-dot" aria-hidden="true">🎵</span>
-                            <div>
-                                <h3>TikTok</h3>
-                                <p>Devlogs ASMR, proceso de dibujo y curiosidades de mitología y plantas.</p>
-                                <a class="btn btn-light" aria-disabled="true" data-track="red_tiktok">Enlace próximamente</a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <p class="hint social-note">Los canales marcados como «próximamente» se activarán cuando estén publicados.</p>
-            </div>
-        </section>
+       
     </main>
     <footer class="site-footer">
         <div class="container">
