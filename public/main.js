@@ -6,14 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const metaBase = document.querySelector('meta[name="api-base"]');
-    const API_BASE = metaBase ? metaBase.content.replace(/\/$/, '') : (location.protocol === 'file:' ? 'http://localhost:3000' : '');
+    const API_BASE = metaBase ? metaBase.content.replace(/\/$/, '') : (location.protocol === 'file:' ? 'http://localhost:8888' : '');
 
     const safeStorage = {
         get(key) { try { return sessionStorage.getItem(key); } catch (e) { return null; } },
         set(key, value) { try { sessionStorage.setItem(key, value); } catch (e) { /* sin almacenamiento */ } }
     };
 
-    const eventQueue = [];
     let sessionId = safeStorage.get('yolcatl-session');
     if (!sessionId) {
         sessionId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2);
@@ -22,18 +21,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const srcParam = new URLSearchParams(location.search).get('src');
     if (srcParam && /^[a-z0-9_]{1,40}$/.test(srcParam)) safeStorage.set('yolcatl-src', srcParam);
-    const currentSrc = safeStorage.get('yolcatl-src') || 'directo';
+    const params = new URLSearchParams(location.search);
+    const utm = {};
+    ['utm_source', 'utm_medium', 'utm_campaign'].forEach((k) => {
+        const v = params.get(k);
+        if (v && /^[\w\-. ]{1,60}$/.test(v)) utm[k] = v;
+    });
+    const utmSource = utm.utm_source ? utm.utm_source.toLowerCase().replace(/[^a-z0-9_]/g, '_').slice(0, 40) : '';
+    const currentSrc = safeStorage.get('yolcatl-src') || utmSource || 'directo';
 
-    function trackEvent(name, data) {
-        const event = Object.assign({ evento: name, session_id: sessionId, src: currentSrc, timestamp: new Date().toISOString() }, data);
-        eventQueue.push(event);
-        console.info('[yolcatl:telemetria]', event);
+    // Telemetría del funnel -> POST /api/metrics (keepalive evita que se aborte si el usuario cambia de página)
+    function sendMetric(step, extra) {
+        const payload = {
+            step,
+            source: currentSrc,
+            sessionId,
+            metadata: Object.assign({
+                device: window.matchMedia('(max-width: 767px)').matches ? 'mobile' : 'desktop',
+                path: location.pathname
+            }, utm, extra)
+        };
+        try {
+            fetch(API_BASE + '/api/metrics', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+                keepalive: true
+            }).catch(() => {});
+        } catch (e) { /* la telemetría nunca debe romper la página */ }
     }
-    trackEvent('visita');
+    const stepForTarget = (target) =>
+        target.startsWith('aliado_') ? 'bofu_cross_promo'
+        : target === 'feedback_forms' ? 'feedback_submission'
+        : 'bofu_interaction';
 
+    // TOFU: llegada (una vez por sesión)
+    if (!safeStorage.get('yolcatl-tofu')) {
+        safeStorage.set('yolcatl-tofu', '1');
+        sendMetric('tofu_attraction');
+    }
+    // MOFU: la persona realmente llegó a leer la landing (una vez por sesión)
+    if (!safeStorage.get('yolcatl-mofu')) {
+        const marker = document.getElementById('hacienda');
+        const fireMofu = () => { safeStorage.set('yolcatl-mofu', '1'); sendMetric('mofu_landing'); };
+        if (marker && 'IntersectionObserver' in window) {
+            const once = new IntersectionObserver((entries, obs) => {
+                if (entries.some((en) => en.isIntersecting)) { obs.disconnect(); fireMofu(); }
+            }, { threshold: 0.2 });
+            once.observe(marker);
+        } else {
+            fireMofu();
+        }
+    }
+    // BOFU: clics marcados con data-track
     document.addEventListener('click', (e) => {
         const target = e.target.closest('[data-track]');
-        if (target && target.getAttribute('aria-disabled') !== 'true') trackEvent('clic', { target: target.dataset.track });
+        if (target && target.getAttribute('aria-disabled') !== 'true') {
+            sendMetric(stepForTarget(target.dataset.track), { target: target.dataset.track });
+        }
     });
 
     const root = document.documentElement;
@@ -247,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const button = contactForm.querySelector('button[type="submit"]');
         button.disabled = true;
         try {
-            const { status, data } = await postJson('/contact', { name: name.value.trim(), email: email.value.trim(), message: message.value.trim() });
+            const { status, data } = await postJson('/api/contact', { name: name.value.trim(), email: email.value.trim(), message: message.value.trim(), website: contactForm.elements['website'].value, src: currentSrc });
             if (status === 201) { setStatus(contactStatus, data.message || '¡Mensaje enviado! Te responderemos pronto.', true); contactForm.reset(); }
             else setStatus(contactStatus, data.message || 'No se pudo enviar el mensaje.', false);
         } catch (err) {
@@ -260,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const meterCount = document.getElementById('meter-count');
     async function loadMilestone() {
         try {
-            const response = await fetch(API_BASE + '/stats');
+            const response = await fetch(API_BASE + '/api/stats');
             if (!response.ok) throw new Error('HTTP ' + response.status);
             const data = await response.json();
             meter.max = data.meta;
@@ -287,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const button = newsForm.querySelector('button[type="submit"]');
         button.disabled = true;
         try {
-            const { status, data } = await postJson('/subscribe', { email: email.value.trim(), src: currentSrc });
+            const { status, data } = await postJson('/api/subscribe', { email: email.value.trim(), src: currentSrc });
             if (status === 201) { setStatus(newsStatus, data.message, true); newsForm.reset(); loadMilestone(); }
             else if (status === 409) setStatus(newsStatus, data.message, null);
             else setStatus(newsStatus, data.message || 'No se pudo completar el registro.', false);
